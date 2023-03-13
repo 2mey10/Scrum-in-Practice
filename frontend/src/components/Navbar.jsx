@@ -13,8 +13,10 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import PsychologyIcon from '@mui/icons-material/Psychology';
+import {useNavigate} from 'react-router-dom';
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
-const pages = ['Courses', 'Login'];
+const pages = ['Courses', 'Login','Register'];
 const applicationName = "App Name"
 function ResponsiveAppBar() {
 
@@ -42,11 +44,21 @@ function ResponsiveAppBar() {
                     </Typography>
 
                     {/*show pages*/}
-                    {pages.map((page) => (
-                        <MenuItem key={page}>
-                            <Typography textAlign="center">{page}</Typography>
-                        </MenuItem>
-                    ))}
+                    <Router>
+                        {pages.map((page) => (
+                            <Button
+                                key={page}
+                                component="a"
+                                href={`/${page.toLowerCase()}`}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                {page}
+                            </Button>
+                        ))}
+
+                    </Router>
+
+
 
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
