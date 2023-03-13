@@ -8,8 +8,14 @@ class QuestionSerializer(serializers.ModelSerializer):
             'id',
             'description_text',
             'title_text',
-            'dataset_url',
+            'train_dataset_url',
+            'test_dataset_url',
             'metric_choices',
-            'role_choices'
+            'role_choices',
+            'course_choices',
+            'starting_time',
+            'end_time',
+            'cover_image',
+
         )
         model = Challenge
