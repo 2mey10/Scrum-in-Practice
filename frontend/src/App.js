@@ -2,21 +2,31 @@ import logo from './logo.svg';
 import './App.css';
 import Typography from "@mui/material/Typography";
 import Navbar from "./components/Navbar";
-import Login from './components/Login';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link, Routes, RouterProvider, createRoutesFromElements, createBrowserRouter
+} from "react-router-dom";
+import CourseImageClassification from "./components/courses/courseImagesClassification/courseImageClassification";
+import Home from "./components/Home";
+import ToBeImplemented from "./components/ToBeImplemented";
+import ErrorPage from "./components/ErrorPage";
+
+
 function App() {
   return (
     <div className="App">
-        <Navbar>
 
-        </Navbar>
-      <Typography variant={"h1"}>
-          {/* Content */}
-          <Login>
-
-          </Login>
-      </Typography>
-
-
+        <Navbar/>
+        <Router>
+            <Routes>
+                <Route element={<CourseImageClassification/>} path="/courses"/>
+                <Route element={<ToBeImplemented />} path="/login" />
+                <Route element={<ToBeImplemented/>} path="/register" />
+                <Route element={<Home />} path="/" />
+            </Routes>
+        </Router>
     </div>
   );
 }
