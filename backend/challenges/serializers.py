@@ -9,6 +9,7 @@ class QuestionSerializer(serializers.ModelSerializer):
             'description_text',
             'title_text',
             'dataset_url',
-            'metric_choice',
+            'metric_choices',
+            'role_choices'
         )
         model = Challenge
