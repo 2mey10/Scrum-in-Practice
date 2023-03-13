@@ -14,6 +14,7 @@ import ToBeImplemented from "./components/ToBeImplemented";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import Register from './components/Register';
+import CreateChallenge from './components/courses/CreateChallenge';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <Route element={<Login />} path="/login" />
                 <Route element={<Register />} path="/register" />
                 <Route element={<ToBeImplemented/>} path="/register" />
+                <Route element={<CreateChallenge/>} path="/CreateChallenge" />
                 <Route element={<Home />} path="/" />
             </Routes>
         </Router>
