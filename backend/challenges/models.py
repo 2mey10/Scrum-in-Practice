@@ -19,6 +19,13 @@ class Roles(models.Model):
         return self.role_name
 
 
+class Courses(models.Model):
+    course_name = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.role_name
+
+
 class Challenge(models.Model):
     # class Metric(models.TextChoices):
     #     ACCURACY = "1", "accuracy"
@@ -27,11 +34,15 @@ class Challenge(models.Model):
 
     description_text = models.CharField(max_length=500)
     title_text = models.CharField(max_length=50)
-    dataset_url = models.URLField()
+    train_dataset_url = models.URLField(null=True)
+    test_dataset_url = models.URLField(null=True)
     metric_choices = models.ManyToManyField(Metric)
     role_choices = models.ManyToManyField(Roles)
+    course_choices = models.ManyToManyField(Courses)
     # metric_choice = models.TextField(choices=Metric.choices)
-    remaining_time = models.TimeField(auto_now_add=False, blank=True, null=True)
+    starting_time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
+    end_time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
+    cover_image = models.ImageField(upload_to='images/', null=True)
 
     def __str__(self):
         return self.title_text
