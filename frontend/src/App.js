@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Typography from "@mui/material/Typography";
 import Navbar from "./components/Navbar";
+import Login from './components/Login';
 function App() {
   return (
     <div className="App">
@@ -9,7 +10,10 @@ function App() {
 
         </Navbar>
       <Typography variant={"h1"}>
-          Content
+          {/* Content */}
+          <Login>
+
+          </Login>
       </Typography>
 
 
