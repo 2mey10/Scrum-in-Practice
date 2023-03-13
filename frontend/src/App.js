@@ -12,6 +12,7 @@ import CourseImageClassification from "./components/courses/courseImagesClassifi
 import Home from "./components/Home";
 import ToBeImplemented from "./components/ToBeImplemented";
 import ErrorPage from "./components/ErrorPage";
+import Login from "./components/Login";
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
         <Router>
             <Routes>
                 <Route element={<CourseImageClassification/>} path="/courses"/>
-                <Route element={<ToBeImplemented />} path="/login" />
+                <Route element={<Login />} path="/login" />
                 <Route element={<ToBeImplemented/>} path="/register" />
                 <Route element={<Home />} path="/" />
             </Routes>
