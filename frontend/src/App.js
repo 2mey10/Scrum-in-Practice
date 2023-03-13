@@ -27,13 +27,6 @@ function App() {
                 <Route element={<Home />} path="/" />
             </Routes>
         </Router>
-
-
-      {/*<Typography variant={"h1"}>*/}
-      {/*    Basepage*/}
-      {/*</Typography>*/}
-
-
     </div>
   );
 }
