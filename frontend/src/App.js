@@ -14,16 +14,19 @@ import ToBeImplemented from "./components/ToBeImplemented";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import Register from './components/Register';
+import CoursesOverview from "./components/courses/CoursesOverview";
+import CourseOverview from "./components/courses/CourseOverview";
 
 
 function App() {
   return (
     <div className="App">
-
         <Navbar/>
         <Router>
             <Routes>
-                <Route element={<CourseImageClassification/>} path="/courses"/>
+                <Route element={<CoursesOverview/>} path="/courses"/>
+                <Route element={<CourseOverview />} path="/courses/:courseID"/>
+
                 <Route element={<Login />} path="/login" />
                 <Route element={<Register />} path="/register" />
                 <Route element={<ToBeImplemented/>} path="/register" />
