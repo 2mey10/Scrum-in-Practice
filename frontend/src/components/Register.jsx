@@ -116,7 +116,7 @@ function Register() {
                 </Button>
             </form>
             <div style={{ marginTop: "16px" }}>
-                <Typography variant="body2" color="textSecondary"><a href="#">Already have an account?</a></Typography>
+                <Typography variant="body2" color="textSecondary"><a href="/Login">Already have an account?</a></Typography>
             </div>
         </Container>
     );

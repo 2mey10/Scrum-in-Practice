@@ -35,7 +35,7 @@ function Login() {
                     </Button>
                 </form>
                 <div style={{ marginTop: "16px" }}>
-                    <Typography variant="body2" color="textSecondary"><a href="#">Don't have an account?</a></Typography>
+                    <Typography variant="body2" color="textSecondary"><a href="/Register">Don't have an account?</a></Typography>
                 </div>
             </div>
         </Container>
