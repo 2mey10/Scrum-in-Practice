@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'challenges.apps.ChallengesConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
