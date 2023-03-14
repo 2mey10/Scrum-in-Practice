@@ -28,10 +28,11 @@ function CourseElement(props) {
                         <Typography gutterBottom variant="h5" component="div">
                             {props.title}
                         </Typography>
+
                         <Typography variant="body2" color="text.secondary">
-                            This course provides essential information about interesting things you will probably never
-                            need in you life :)
+                            {props.description}
                         </Typography>
+
                     </CardContent>
                 </CardActionArea>
             </Card>
@@ -103,6 +104,7 @@ function CoursesOverview() {
                     <CourseElement
                         courseID ={course.id}
                         title={course.course_name}
+                        description={course.course_description}
                     />
                 ))}
                 {challenges.map((challenge) => (

@@ -62,7 +62,7 @@ function CoursesOverview(props) {
         if (obj.id === Number(courseID)) {
             console.log("found the one")
             selectedCourseTitle=obj.course_name
-            //selectedCourseDescription=obj.description
+            selectedCourseDescription=obj.course_description
         }
         console.log(obj.id)
         console.log(courseID)
@@ -83,9 +83,11 @@ function CoursesOverview(props) {
             <Typography variant={"h1"}>
                 {selectedCourseTitle}
             </Typography>
-            <Typography variant={"h4"} color="#808080">
-                {selectedCourseDescription}
-            </Typography>
+            <div className="course-description">
+                <Typography variant={"h4"} color="#808080">
+                    {selectedCourseDescription}
+                </Typography>
+            </div>
 
             <div className="course-container">
                 {selectedChallenges.map((challenge) => (
