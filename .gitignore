@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 backend/db.sqlite3
+backend/db.sqlite3
