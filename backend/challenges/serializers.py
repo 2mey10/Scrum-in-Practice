@@ -5,26 +5,6 @@ from .models import Courses
 from .models import Metric
 
 
-class QuestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = (
-            'id',
-            'description_text',
-            'title_text',
-            'train_dataset_url',
-            'test_dataset_url',
-            'metric_choices',
-            'role_choices',
-            'course_choices',
-            'starting_time',
-            'end_time',
-            'cover_image',
-
-        )
-        model = Challenge
-        depth = 1
-
-
 class RolesSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
@@ -56,3 +36,26 @@ class MetricSerializer(serializers.ModelSerializer):
         model = Metric
 
 
+
+class QuestionSerializer(serializers.ModelSerializer):
+
+    metric_choices = MetricSerializer(many=True)
+    role_choices = RolesSerializer(many=True)
+    course_choices = CoursesSerializer(many=True)
+    class Meta:
+        fields = (
+            'id',
+            'description_text',
+            'title_text',
+            'train_dataset_url',
+            'test_dataset_url',
+            'metric_choices',
+            'role_choices',
+            'course_choices',
+            'starting_time',
+            'end_time',
+            'cover_image',
+
+        )
+        model = Challenge
+        depth = 1
