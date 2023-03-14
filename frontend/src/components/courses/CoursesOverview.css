@@ -1,0 +1,12 @@
+.course-container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    #justify-content: space-evenly;
+    max-width: 80%;
+    margin-left: 10%;
+}
+.course-element{
+    margin: 30px;
+}
