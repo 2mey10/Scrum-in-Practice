@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'challenges.apps.ChallengesConfig',
+    'ranking.apps.RankingConfig',
     'rest_framework',
 ]
 
