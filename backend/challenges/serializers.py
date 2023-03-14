@@ -62,8 +62,8 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         metric_data = validated_data.pop('metric_choices')
-        role_data = validated_data.pop('metric_choices')
-        course_data = validated_data.pop('metric_choices')
+        role_data = validated_data.pop('role_choices')
+        course_data = validated_data.pop('course_choices')
 
         tag = Challenge.objects.create(**validated_data)
 
