@@ -22,6 +22,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
         )
         model = Challenge
+        depth = 1
 
 
 class RolesSerializer(serializers.ModelSerializer):
@@ -33,6 +34,7 @@ class RolesSerializer(serializers.ModelSerializer):
         model = Roles
 
 
+
 class CoursesSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
@@ -40,6 +42,7 @@ class CoursesSerializer(serializers.ModelSerializer):
             'course_name',
         )
         model = Courses
+
 
 
 class MetricSerializer(serializers.ModelSerializer):
@@ -50,4 +53,5 @@ class MetricSerializer(serializers.ModelSerializer):
             'metric_formular',
         )
         model = Metric
+
 
