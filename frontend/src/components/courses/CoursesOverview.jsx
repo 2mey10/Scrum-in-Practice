@@ -11,7 +11,7 @@ import axios from "axios";
 function CourseElement(props) {
 
     const navigate = useNavigate();
-    const courseID = props.courseID;
+
     return (
         <div className="course-element">
             <Card sx={{ maxWidth: 300 }}>
@@ -21,11 +21,11 @@ function CourseElement(props) {
                         height="140"
                         image="/static/images/hörsaal.jpg"
                         alt="no image"
-                        onClick={() => navigate(`/courses/${courseID}`)}
+                        onClick={() => navigate(`/courses/${props.courseID}`)}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            Course
+                            {props.title}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             This course provides essential information about interesting things you will probably never
@@ -68,36 +68,55 @@ function ChallengeElement() {
 
 
 function CoursesOverview() {
-    const courses = [1,2,3,4,5]
-    const challenges = [1,2,3,4,5,6,7]
+    const courses_ = [1,2,3,4,5]
+    const challenges_ = [1,2,3,4,5,6,7]
 
     const baseURL = "http://127.0.0.1:8000/api/"
-    const [data, setData] = useState([]);
-
-    const {courseID} = useParams()
-    const title = "Course " + courseID
+    const [courses, setCourses] = useState([]);
+    const [challenges, setChallenges] = useState([]);
 
 
+    // fetch challenges data
     useEffect(() => {
         const getData = async () => {
             try {
                 const response = await axios.get(
                     baseURL + `challenge/`
                 );
-                console.log("fetched data");
-                setData(response.data);
+                console.log("fetched challenges data");
+                setChallenges(response.data);
             } catch (err) {
                 console.log(err.message);
-                console.log("error in fetching data")
-                setData(null);
+                console.log("error in fetching challenges data")
+                setChallenges(null);
             }
         };
         getData();
     }, []);
-    console.log(`data: ${data}`);
+
+    // fetch courses data
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await axios.get(
+                    baseURL + `courses/`
+                );
+                console.log("fetched courses data");
+                setCourses(response.data);
+            } catch (err) {
+                console.log(err.message);
+                console.log("error in fetching courses data")
+                setCourses(null);
+            }
+        };
+        getData();
+    }, []);
 
 
-
+    console.log(`challenge data`);
+    console.log(challenges)
+    console.log(`course data`);
+    console.log(courses)
 
     return (
         <div >
@@ -107,9 +126,12 @@ function CoursesOverview() {
 
             <div className="course-container">
                 {courses.map((course) => (
-                    <CourseElement courseID ={course} />
+                    <CourseElement
+                        courseID ={course.id}
+                        title={course.course_name}
+                    />
                 ))}
-                {challenges.map((challenge) => (
+                {challenges_.map((challenge) => (
                     <ChallengeElement/>
                 ))}
             </div>

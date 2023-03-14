@@ -34,13 +34,14 @@ function ChallengeElement(props) {
 }
 
 
-function CoursesOverview() {
+function CoursesOverview(props) {
 
     const baseURL = "http://127.0.0.1:8000/api/"
     const [data, setData] = useState([]);
 
     const {courseID} = useParams()
     const title = "Course " + courseID
+
 
 
     useEffect(() => {
