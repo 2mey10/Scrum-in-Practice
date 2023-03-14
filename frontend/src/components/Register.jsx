@@ -8,6 +8,7 @@ function Register() {
     const [mNr, setMNr] = useState(0);
     const [name, setName] = useState('');
     const [nachname, setNachname] = useState('');
+    const [gebDatum, setGebDatum] = useState('');
     const [adresse, setAdresse] = useState('');
     const [austausch, setAustausch] = useState(false);
     const [studiengang, setStudiengang] = useState('');
@@ -77,6 +78,9 @@ function Register() {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField label="Nachname" fullWidth margin="normal" value={nachname} onChange={(e) => setNachname(e.target.value)} required/>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField label="Geburtsdatum" fullWidth margin="normal" type="datetime-local" value={gebDatum} InputLabelProps={{ shrink: true }} onChange={(e) => setNachname(e.target.value)} required/>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField label="Adresse" fullWidth margin="normal" value={adresse} onChange={(e) => setAdresse(e.target.value)} required/>
