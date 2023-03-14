@@ -10,3 +10,9 @@
 .course-element{
     margin: 30px;
 }
+.course-description{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+}

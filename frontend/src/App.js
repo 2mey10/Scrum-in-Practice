@@ -8,7 +8,6 @@ import {
     Route,
     Link, Routes, RouterProvider, createRoutesFromElements, createBrowserRouter
 } from "react-router-dom";
-import CourseImageClassification from "./components/courses/courseImagesClassification/courseImageClassification";
 import Home from "./components/Home";
 import ToBeImplemented from "./components/ToBeImplemented";
 import ErrorPage from "./components/ErrorPage";
