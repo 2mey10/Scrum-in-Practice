@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'challenges.apps.ChallengesConfig',
+    'ranking.apps.RankingConfig',
     'rest_framework',
-    'registration.apps.RegistrationConfig'
 ]
 
 MIDDLEWARE = [
@@ -127,4 +127,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
 

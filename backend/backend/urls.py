@@ -22,6 +22,7 @@ from registration import views as user_views
 urlpatterns = [
     
     path('api/', include('challenges.urls')),
+    path('api/', include('ranking.urls')),
     path('admin/', admin.site.urls),
     path('register/', user_views.register_view, name='register'),
 ]
