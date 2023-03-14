@@ -21,6 +21,7 @@ class Roles(models.Model):
 
 class Courses(models.Model):
     course_name = models.CharField(max_length=300)
+    course_description = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.course_name
