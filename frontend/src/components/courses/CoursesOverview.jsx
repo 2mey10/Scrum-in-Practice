@@ -7,6 +7,7 @@ import {Card, CardActionArea, CardContent, CardMedia} from "@mui/material";
 import { redirect } from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import ChallengeElement from "./ChallengeElement";
 
 function CourseElement(props) {
 
@@ -14,7 +15,7 @@ function CourseElement(props) {
 
     return (
         <div className="course-element">
-            <Card sx={{ maxWidth: 300 }}>
+            <Card sx={{height:300, width:300}}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
@@ -29,33 +30,6 @@ function CourseElement(props) {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             This course provides essential information about interesting things you will probably never
-                            need in you life :)
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
-        </div>
-
-    );
-}
-
-function ChallengeElement() {
-    return (
-        <div className="course-element">
-            <Card sx={{ maxWidth: 300 }}>
-                <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image="/static/images/unibib.png"
-                        alt="no image"
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Challenge
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            This challenge provides essential information about interesting things you will probably never
                             need in you life :)
                         </Typography>
                     </CardContent>
@@ -131,8 +105,11 @@ function CoursesOverview() {
                         title={course.course_name}
                     />
                 ))}
-                {challenges_.map((challenge) => (
-                    <ChallengeElement/>
+                {challenges.map((challenge) => (
+                    <ChallengeElement
+                        title={challenge.title_text}
+                        description_text={challenge.description_text}
+                    />
                 ))}
             </div>
 
