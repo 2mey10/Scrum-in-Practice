@@ -8,7 +8,6 @@ import {
     Route,
     Link, Routes, RouterProvider, createRoutesFromElements, createBrowserRouter
 } from "react-router-dom";
-import CourseImageClassification from "./components/courses/courseImagesClassification/courseImageClassification";
 import Home from "./components/Home";
 import ToBeImplemented from "./components/ToBeImplemented";
 import ErrorPage from "./components/ErrorPage";
@@ -28,7 +27,6 @@ function App() {
             <Routes>
                 <Route element={<CoursesOverview/>} path="/courses"/>
                 <Route element={<CourseOverview />} path="/courses/:courseID"/>
-
                 <Route element={<Login />} path="/login" />
                 <Route element={<Register />} path="/register" />
                 <Route element={<ToBeImplemented/>} path="/register" />

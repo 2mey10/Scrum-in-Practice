@@ -40,6 +40,7 @@ class CoursesSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'course_name',
+            'course_description',
         )
         model = Courses
 

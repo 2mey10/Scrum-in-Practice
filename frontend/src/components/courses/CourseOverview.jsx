@@ -5,49 +5,95 @@ import {useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import {Card, CardActionArea, CardContent, CardMedia} from "@mui/material";
 import { useParams } from 'react-router-dom'
-function ChallengeElement() {
-    return (
-        <div className="course-element">
-            <Card sx={{ maxWidth: 300 }}>
-                <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image="/static/images/unibib.png"
-                        alt="no image"
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Challenge
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            This challenge provides essential information about interesting things you will probably never
-                            need in you life :)
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
-        </div>
+import {useEffect, useState} from "react";
+import axios from "axios";
+import ChallengeElement from "./ChallengeElement";
 
-    );
-}
+function CoursesOverview(props) {
 
+    const baseURL = "http://127.0.0.1:8000/api/"
 
-function CoursesOverview() {
-    const challenges = [1,2,3,4,5,6,7]
+    const [courses, setCourses] = useState([]);
+    const [challenges, setChallenges] = useState([]);
+
     const {courseID} = useParams()
-    const title = "Course " + courseID
-    // fetch more information about literally everything through the api endpoint
-    console.log(courseID)
+
+    // fetch challenges data
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await axios.get(
+                    baseURL + `challenge/`
+                );
+                console.log("fetched challenges data");
+                setChallenges(response.data);
+            } catch (err) {
+                console.log(err.message);
+                console.log("error in fetching challenges data")
+                setChallenges(null);
+            }
+        };
+        getData();
+    }, []);
+
+    // fetch courses data
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await axios.get(
+                    baseURL + `courses/`
+                );
+                console.log("fetched courses data");
+                setCourses(response.data);
+            } catch (err) {
+                console.log(err.message);
+                console.log("error in fetching courses data")
+                setCourses(null);
+            }
+        };
+        getData();
+    }, []);
+    console.log(`data: ${courses}`);
+
+    // filter courses by the current ID
+    let selectedCourseTitle = "";
+    let selectedCourseDescription = "Empty Description lol";
+    courses.forEach((obj)=>{
+        if (obj.id === Number(courseID)) {
+            console.log("found the one")
+            selectedCourseTitle=obj.course_name
+            selectedCourseDescription=obj.course_description
+        }
+        console.log(obj.id)
+        console.log(courseID)
+    });
+
+    // filter challenges whether they apply for current course
+    let selectedChallenges = []
+    challenges.forEach((obj)=>{
+        obj.course_choices.forEach((choice)=>{
+            if (choice.id === Number(courseID)){
+                selectedChallenges.push(obj)
+            }
+        })
+    })
+
     return (
         <div >
             <Typography variant={"h1"}>
-                {title}
+                {selectedCourseTitle}
             </Typography>
+            <div className="course-description">
+                <Typography variant={"h4"} color="#808080">
+                    {selectedCourseDescription}
+                </Typography>
+            </div>
 
             <div className="course-container">
-                {challenges.map((course) => (
-                    <ChallengeElement/>
+                {selectedChallenges.map((challenge) => (
+                    <ChallengeElement
+                        title={challenge.title_text}
+                        description_text={challenge.description_text}/>
                 ))}
             </div>
 
