@@ -16,7 +16,7 @@ import Register from './components/Register';
 import CreateChallenge from './components/courses/CreateChallenge';
 import CoursesOverview from "./components/courses/CoursesOverview";
 import CourseOverview from "./components/courses/CourseOverview";
-
+import Ranking from './components/Ranking';
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
                 <Route element={<Register />} path="/register" />
                 <Route element={<ToBeImplemented/>} path="/register" />
                 <Route element={<CreateChallenge/>} path="/CreateChallenge" />
+                <Route element={<Ranking/>} path="/ranking" />
                 <Route element={<Home />} path="/" />
             </Routes>
         </Router>
