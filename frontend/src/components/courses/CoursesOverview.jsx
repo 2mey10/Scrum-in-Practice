@@ -109,6 +109,7 @@ function CoursesOverview() {
                     <ChallengeElement
                         title={challenge.title_text}
                         description_text={challenge.description_text}
+                        data={challenge}
                     />
                 ))}
             </div>

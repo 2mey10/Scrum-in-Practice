@@ -6,7 +6,7 @@ import {
     CardMedia,
     Checkbox,
     Dialog,
-    DialogTitle, FormControlLabel, FormGroup, List, ListItem, ListItemText,
+    DialogTitle, FormControlLabel, FormGroup, Grid, List, ListItem, ListItemText,
     TextField
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -19,6 +19,7 @@ import Container from "@mui/material/Container";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import {Link} from "react-router-dom";
 import {CheckBox} from "@mui/icons-material";
+import Button from "@mui/material/Button";
 
 function DetailedChallenge(props) {
     const { onClose, open,title, description, data} = props;
@@ -45,51 +46,68 @@ function DetailedChallenge(props) {
             </Typography>
             <div className="outer-container">
                 <div className="container">
-                    <Typography variant="h5" paddingX="20px" paddingY="10px">
-                        Datasets
-                    </Typography>
-                    <div className="container-element">
-                        <TextField
-                            id="outlined-read-only-input"
-                            label="Training Dataset"
-                            sx={{maxWidth:textfieldLength,minWidth:textfieldLength}}
-                            defaultValue={props.data.train_dataset_url}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
+                    <Grid container rowSpacing={1} paddingY="30px">
+                        <Grid xs={6}>
+                            <Typography variant="h5" sx={{display:"flex", justifyContent:"center"}}>
+                                Datasets
+                            </Typography>
+                            <div className="container-element">
+                                <TextField
+                                    id="outlined-read-only-input"
+                                    label="Training Dataset"
+                                    sx={{maxWidth:textfieldLength,minWidth:textfieldLength}}
+                                    defaultValue={props.data.train_dataset_url}
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                />
+                            </div>
+                            <div className="container-element">
+                                <TextField
+                                    id="outlined-read-only-input"
+                                    label="Test Dataset"
+                                    sx={{maxWidth:"400px",minWidth:"400px"}}
+                                    defaultValue={props.data.test_dataset_url}
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                />
+                            </div>
+                        </Grid>
+                        <Grid xs={6}>
+                            <Typography variant="h5"sx={{display:"flex", justifyContent:"center"}}>
+                                Metrics
+                            </Typography>
+                            <List sx={{display:"flex"}}>
+                                {metrics.map((metric)=>(
+                                    <ListItem sx={{margin:"3px"}}>
+                                        <ListItemText
+                                            primary={metric}
+                                            secondary={"Metric description"}
+                                        />
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </Grid>
+                        <Grid xs={6} sx={{display:"flex",justifyContent:"center"}}>
+                            <Button variant="contained" sx={{width:"90%"}} component="label">
+                                Select Model
+                                <input hidden accept="image/*" multiple type="file" />
+                            </Button>
+                        </Grid>
+                        <Grid xs={6} sx={{display:"flex",justifyContent:"center"}}>
+                            <Button variant="contained" sx={{width:"90%",}}>
+                                Submit Model
+                            </Button>
+                        </Grid>
 
-                    </div>
-                    <div className="container-element">
-                        <TextField
-                            id="outlined-read-only-input"
-                            label="Test Dataset"
-                            sx={{maxWidth:"400px",minWidth:"400px"}}
-                            defaultValue={props.data.test_dataset_url}
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <Typography variant="h5" paddingX="20px">
-                            Metrics
-                        </Typography>
-                        <List>
-                            {metrics.map((metric)=>(
-                                <ListItem>
-                                    <ListItemText
-                                        primary={metric}
-                                        // secondary={"Description"}
-                                    />
-                                </ListItem>
-                            ))}
-                        </List>
-                    </div>
+                    </Grid>
+
 
 
 
                 </div>
+
 
             </div>
         </Dialog>
@@ -108,6 +126,8 @@ function ChallengeElement(props) {
     const handleClose = () => {
         setOpen(false);
     };
+    console.log("challenge element data")
+    console.log(props.data)
 
     return (
         <div className="course-element">
