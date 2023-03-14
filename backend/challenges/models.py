@@ -23,7 +23,7 @@ class Courses(models.Model):
     course_name = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.role_name
+        return self.course_name
 
 
 class Challenge(models.Model):
@@ -34,15 +34,15 @@ class Challenge(models.Model):
 
     description_text = models.CharField(max_length=500)
     title_text = models.CharField(max_length=50)
-    train_dataset_url = models.URLField(null=True)
-    test_dataset_url = models.URLField(null=True)
+    train_dataset_url = models.URLField(blank=True, null=True)
+    test_dataset_url = models.URLField(blank=True, null=True)
     metric_choices = models.ManyToManyField(Metric)
     role_choices = models.ManyToManyField(Roles)
     course_choices = models.ManyToManyField(Courses)
     # metric_choice = models.TextField(choices=Metric.choices)
     starting_time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
     end_time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
-    cover_image = models.ImageField(upload_to='images/', null=True)
+    cover_image = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self):
         return self.title_text
