@@ -1,4 +1,5 @@
-from django.shortcuts import render
+
+from django.shortcuts import render, redirect
 from rest_framework import viewsets
 
 from . import models
@@ -23,4 +24,9 @@ class CoursesViewSet(viewsets.ModelViewSet):
 class MetricViewSet(viewsets.ModelViewSet):
     queryset = models.Metric.objects.all()
     serializer_class = serializers.MetricSerializer
+
+
+
+
+
 
