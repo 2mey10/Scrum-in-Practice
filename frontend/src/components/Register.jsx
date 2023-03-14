@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, TextField, Button, Typography, Grid, InputLabel, Select, FormControl } from '@mui/material';
+import { Container, TextField, Button, Typography, Grid, InputLabel, Select, FormControl, FormGroup, FormControlLabel,Checkbox } from '@mui/material';
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -14,7 +14,7 @@ function Register() {
     const [studiengang, setStudiengang] = useState('');
     const [prüfungsordnung, setPrüfungsordnung] = useState('');
     const [anrechnung_des_Moduls, setAnrechnung_des_Moduls] = useState('');
-    const [tutorkey,setKey] = useState('');
+    const [tutorkey, setKey] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -62,37 +62,37 @@ function Register() {
                 {error && <Typography variant="body1" color="error" gutterBottom>{error}</Typography>}
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Username" fullWidth margin="normal" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+                        <TextField label="Username" fullWidth margin="normal" value={username} onChange={(e) => setUsername(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Password" fullWidth margin="normal" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                        <TextField label="Password" fullWidth margin="normal" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Email" fullWidth margin="normal" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                        <TextField label="Email" fullWidth margin="normal" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Matrikelnummer" fullWidth margin="normal" type="number" value={mNr} onChange={(e) => setMNr(e.target.value)} required/>
+                        <TextField label="Matrikelnummer" fullWidth margin="normal" type="number" value={mNr} onChange={(e) => setMNr(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Name" fullWidth margin="normal" value={name} onChange={(e) => setName(e.target.value)} required/>
+                        <TextField label="Name" fullWidth margin="normal" value={name} onChange={(e) => setName(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Nachname" fullWidth margin="normal" value={nachname} onChange={(e) => setNachname(e.target.value)} required/>
+                        <TextField label="Nachname" fullWidth margin="normal" value={nachname} onChange={(e) => setNachname(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Geburtsdatum" fullWidth margin="normal" type="datetime-local" value={gebDatum} InputLabelProps={{ shrink: true }} onChange={(e) => setNachname(e.target.value)} required/>
+                        <TextField label="Geburtsdatum" fullWidth margin="normal" type="datetime-local" value={gebDatum} InputLabelProps={{ shrink: true }} onChange={(e) => setNachname(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Adresse" fullWidth margin="normal" value={adresse} onChange={(e) => setAdresse(e.target.value)} required/>
+                        <TextField label="Adresse" fullWidth margin="normal" value={adresse} onChange={(e) => setAdresse(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Studiengang" fullWidth margin="normal" value={studiengang} onChange={(e) => setStudiengang(e.target.value)} required/>
+                        <TextField label="Studiengang" fullWidth margin="normal" value={studiengang} onChange={(e) => setStudiengang(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Prüfungsordnung" fullWidth margin="normal" value={prüfungsordnung} onChange={(e) => setPrüfungsordnung(e.target.value)} required/>
+                        <TextField label="Prüfungsordnung" fullWidth margin="normal" value={prüfungsordnung} onChange={(e) => setPrüfungsordnung(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Anrechnung des Moduls" fullWidth margin="normal" value={anrechnung_des_Moduls} onChange={(e) => setAnrechnung_des_Moduls(e.target.value)} required/>
+                        <TextField label="Anrechnung des Moduls" fullWidth margin="normal" value={anrechnung_des_Moduls} onChange={(e) => setAnrechnung_des_Moduls(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <FormControl fullWidth margin="normal">
@@ -112,7 +112,12 @@ function Register() {
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Tutor key" fullWidth margin="normal" value={ tutorkey} onChange={(e) => setKey(e.target.value)} />
+                        <TextField label="Tutor key" fullWidth margin="normal" value={tutorkey} onChange={(e) => setKey(e.target.value)} />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <FormGroup>
+                            <FormControlLabel control={<Checkbox defaultChecked />} label="Ich Stimme der AGBs ab" required/>
+                        </FormGroup>
                     </Grid>
                 </Grid>
                 <Button type="submit" variant="contained" color="primary" disabled={isLoading} style={{ marginTop: "16px" }}>
