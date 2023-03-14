@@ -16,7 +16,7 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import {useNavigate} from 'react-router-dom';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-const pages = ['Courses', 'Login','Register','CreateChallenge'];
+const pages = ['Courses', 'Login','Register','CreateChallenge','Ranking'];
 const applicationName = "App Name"
 function ResponsiveAppBar() {
 

@@ -20,6 +20,7 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import {Link} from "react-router-dom";
 import {CheckBox} from "@mui/icons-material";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
 function DetailedChallenge(props) {
     const { onClose, open,title, description, data} = props;
@@ -35,6 +36,35 @@ function DetailedChallenge(props) {
     props.data.metric_choices.forEach((metric)=>{
         metrics.push(metric.metric_name)
     })
+
+    function submitRequest(){
+        console.log("Submitting data to the api ;)")
+    }
+
+    // a local state to store the currently selected file.
+    const [selectedFile, setSelectedFile] = React.useState(null);
+
+
+    const baseURL = "http://127.0.0.1:8000/api/"
+    const handleSubmit = async(event) => {
+        event.preventDefault()
+        const formData = new FormData();
+        formData.append("selectedFile", selectedFile);
+        try {
+            const response = await axios({
+                method: "post",
+                url: baseURL+"mlmodel/",
+                data: formData,
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
+    const handleFileSelect = (event) => {
+        setSelectedFile(event.target.files[0])
+    }
 
     return (
         <Dialog onClose={handleClose} open={open} fullWidth={true} maxWidth={"lg"}>
@@ -90,17 +120,16 @@ function DetailedChallenge(props) {
                             </List>
                         </Grid>
                         <Grid xs={6} sx={{display:"flex",justifyContent:"center"}}>
-                            <Button variant="contained" sx={{width:"90%"}} component="label">
-                                Select Model
-                                <input hidden accept="image/*" multiple type="file" />
-                            </Button>
+                            <form style={{paddingTop:"70px"}}>
+                                <input type="file" onChange={handleFileSelect}/>
+                            </form>
                         </Grid>
                         <Grid xs={6} sx={{display:"flex",justifyContent:"center"}}>
-                            <Button variant="contained" sx={{width:"90%",}}>
+                            <Button variant="contained" sx={{width:"90%"}} onClick={handleSubmit}>
                                 Submit Model
                             </Button>
-                        </Grid>
 
+                        </Grid>
                     </Grid>
 
 
