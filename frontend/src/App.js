@@ -28,7 +28,6 @@ function App() {
             <Routes>
                 <Route element={<CoursesOverview/>} path="/courses"/>
                 <Route element={<CourseOverview />} path="/courses/:courseID"/>
-
                 <Route element={<Login />} path="/login" />
                 <Route element={<Register />} path="/register" />
                 <Route element={<ToBeImplemented/>} path="/register" />

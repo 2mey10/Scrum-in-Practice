@@ -5,7 +5,9 @@ import {useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import {Card, CardActionArea, CardContent, CardMedia} from "@mui/material";
 import { useParams } from 'react-router-dom'
-function ChallengeElement() {
+import {useEffect, useState} from "react";
+import axios from "axios";
+function ChallengeElement(props) {
     return (
         <div className="course-element">
             <Card sx={{ maxWidth: 300 }}>
@@ -18,11 +20,10 @@ function ChallengeElement() {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            Challenge
+                            {props.title}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            This challenge provides essential information about interesting things you will probably never
-                            need in you life :)
+                            {props.description_text}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -34,11 +35,32 @@ function ChallengeElement() {
 
 
 function CoursesOverview() {
-    const challenges = [1,2,3,4,5,6,7]
+
+    const baseURL = "http://127.0.0.1:8000/api/"
+    const [data, setData] = useState([]);
+
     const {courseID} = useParams()
     const title = "Course " + courseID
-    // fetch more information about literally everything through the api endpoint
-    console.log(courseID)
+
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await axios.get(
+                    baseURL + `challenge/`
+                );
+                console.log("fetched data");
+                setData(response.data);
+            } catch (err) {
+                console.log(err.message);
+                console.log("error in fetching data")
+                setData(null);
+            }
+        };
+        getData();
+    }, []);
+    console.log(`data: ${data}`);
+
     return (
         <div >
             <Typography variant={"h1"}>
@@ -46,8 +68,10 @@ function CoursesOverview() {
             </Typography>
 
             <div className="course-container">
-                {challenges.map((course) => (
-                    <ChallengeElement/>
+                {data.map((course) => (
+                    <ChallengeElement
+                        title={course.title_text}
+                        description_text={course.description_text}/>
                 ))}
             </div>
 

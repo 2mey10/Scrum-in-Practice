@@ -1,10 +1,12 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import "./CoursesOverview.css";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Button from "@mui/material/Button";
 import {Card, CardActionArea, CardContent, CardMedia} from "@mui/material";
 import { redirect } from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 function CourseElement(props) {
 
@@ -68,6 +70,35 @@ function ChallengeElement() {
 function CoursesOverview() {
     const courses = [1,2,3,4,5]
     const challenges = [1,2,3,4,5,6,7]
+
+    const baseURL = "http://127.0.0.1:8000/api/"
+    const [data, setData] = useState([]);
+
+    const {courseID} = useParams()
+    const title = "Course " + courseID
+
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await axios.get(
+                    baseURL + `challenge/`
+                );
+                console.log("fetched data");
+                setData(response.data);
+            } catch (err) {
+                console.log(err.message);
+                console.log("error in fetching data")
+                setData(null);
+            }
+        };
+        getData();
+    }, []);
+    console.log(`data: ${data}`);
+
+
+
+
     return (
         <div >
             <Typography variant={"h1"}>
