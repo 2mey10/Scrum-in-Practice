@@ -33,14 +33,16 @@ function ChallengeElement() {
 }
 
 
-function CoursesOverview(props) {
+function CoursesOverview() {
     const challenges = [1,2,3,4,5,6,7]
     const {courseID} = useParams()
+    const title = "Course " + courseID
+    // fetch more information about literally everything through the api endpoint
     console.log(courseID)
     return (
         <div >
             <Typography variant={"h1"}>
-                Course {courseID}
+                {title}
             </Typography>
 
             <div className="course-container">

@@ -6,10 +6,10 @@ import Button from "@mui/material/Button";
 import {Card, CardActionArea, CardContent, CardMedia} from "@mui/material";
 import { redirect } from "react-router-dom";
 
-function CourseElement() {
+function CourseElement(props) {
 
     const navigate = useNavigate();
-    const courseID = 1;
+    const courseID = props.courseID;
     return (
         <div className="course-element">
             <Card sx={{ maxWidth: 300 }}>
@@ -76,9 +76,9 @@ function CoursesOverview() {
 
             <div className="course-container">
                 {courses.map((course) => (
-                    <CourseElement/>
+                    <CourseElement courseID ={course} />
                 ))}
-                {challenges.map((course) => (
+                {challenges.map((challenge) => (
                     <ChallengeElement/>
                 ))}
             </div>
