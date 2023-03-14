@@ -1,0 +1,19 @@
+.container{
+    width:75%;
+    min-height: 500px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    #justify-content: center;
+    margin:20px;
+}
+.container-element{
+    margin:20px;
+}
+.outer-container{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}

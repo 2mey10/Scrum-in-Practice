@@ -9,6 +9,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import ChallengeElement from "./ChallengeElement";
 
+
+
 function CoursesOverview(props) {
 
     const baseURL = "http://127.0.0.1:8000/api/"
@@ -93,7 +95,9 @@ function CoursesOverview(props) {
                 {selectedChallenges.map((challenge) => (
                     <ChallengeElement
                         title={challenge.title_text}
-                        description_text={challenge.description_text}/>
+                        description_text={challenge.description_text}
+                        data = {challenge}
+                    />
                 ))}
             </div>
 
