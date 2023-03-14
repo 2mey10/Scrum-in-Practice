@@ -3,16 +3,16 @@ from .models import Challenge
 from .models import Roles
 from .models import Courses
 from .models import Metric
-
+from drf_writable_nested.serializers import WritableNestedModelSerializer
 
 class RolesSerializer(serializers.ModelSerializer):
+
     class Meta:
         fields = (
             'id',
             'role_name',
         )
         model = Roles
-
 
 
 class CoursesSerializer(serializers.ModelSerializer):
@@ -25,7 +25,6 @@ class CoursesSerializer(serializers.ModelSerializer):
         model = Courses
 
 
-
 class MetricSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
@@ -36,12 +35,11 @@ class MetricSerializer(serializers.ModelSerializer):
         model = Metric
 
 
-
-class QuestionSerializer(serializers.ModelSerializer):
-
+class QuestionSerializer(WritableNestedModelSerializer):
     metric_choices = MetricSerializer(many=True)
     role_choices = RolesSerializer(many=True)
     course_choices = CoursesSerializer(many=True)
+
     class Meta:
         fields = (
             'id',
@@ -59,19 +57,3 @@ class QuestionSerializer(serializers.ModelSerializer):
         )
         model = Challenge
         depth = 1
-
-    def create(self, validated_data):
-        metric_data = validated_data.pop('metric_choices')
-        role_data = validated_data.pop('role_choices')
-        course_data = validated_data.pop('course_choices')
-
-        tag = Challenge.objects.create(**validated_data)
-
-        for met in metric_data:
-            Metric.objects.create(tag=tag, **met)
-        for rol in role_data:
-            Roles.objects.create(tag=tag, **rol)
-        for cou in course_data:
-            Courses.objects.create(tag=tag, **cou)
-
-        return tag
