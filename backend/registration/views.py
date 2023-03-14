@@ -1,6 +1,6 @@
 from pyexpat.errors import messages
 from django.shortcuts import render, redirect
-from .forms import RegistrationForm,LoginForm
+from .forms import UserRegistrationForm,LoginForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -9,22 +9,22 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def register_view(request):
-    msg = None
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            msg = 'user created'
-            return redirect('login_view')
-        else:
-            msg = 'form is not valid'
+            form.save()
+
+            messages.success(request, f'Your account has been created. You can log in now!')    
+            return redirect('login')
     else:
-        form = RegistrationForm()
-    return render(request,'', {'form': form, 'msg': msg})
+        form = UserRegistrationForm()
+
+    context = {'form': form}
+    return render(request, '', context)
 
 
 def login_view(request):
-    form = Login(request.POST or None)
+    form = LoginForm(request.POST or None)
     msg = None
     if request.method == 'POST':
         if form.is_valid():
