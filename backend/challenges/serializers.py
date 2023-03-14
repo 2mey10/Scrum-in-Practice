@@ -59,3 +59,19 @@ class QuestionSerializer(serializers.ModelSerializer):
         )
         model = Challenge
         depth = 1
+
+    def create(self, validated_data):
+        metric_data = validated_data.pop('metric_choices')
+        role_data = validated_data.pop('metric_choices')
+        course_data = validated_data.pop('metric_choices')
+
+        tag = Challenge.objects.create(**validated_data)
+
+        for met in metric_data:
+            Metric.objects.create(tag=tag, **met)
+        for rol in role_data:
+            Roles.objects.create(tag=tag, **rol)
+        for cou in course_data:
+            Courses.objects.create(tag=tag, **cou)
+
+        return tag
