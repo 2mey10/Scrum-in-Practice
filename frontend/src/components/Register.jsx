@@ -180,7 +180,7 @@ function Register() {
                             onChange={(e) => setPrüfungsordnung(e.target.value)}
                             required
                             inputProps={{
-                                pattern: "^[a-zA-Z ]{2,}$",
+                                pattern: "^[a-zA-Z0-9 ]{2,}$",
                                 title: "The Examination regulations should contain only letters and be at least 2 characters long."
                             }}
                         />
