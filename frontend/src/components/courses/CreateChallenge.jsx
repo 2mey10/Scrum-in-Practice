@@ -19,6 +19,7 @@ const CreateChallenge = () => {
     const [coverImage, setCoverImage] = useState(null);
     const [editcourse, setEditCourse] = useState(false);
     const [courseName, setCourseName] = useState('');
+    const [courseDetails, setCourseDetails] = useState('');
 
 
     useEffect(() => {
@@ -76,6 +77,7 @@ const CreateChallenge = () => {
                 },
                 body: JSON.stringify({
                     course_name: courseName,
+                    course_description: courseDetails
                 })
             });
             console.log(response);
@@ -266,6 +268,15 @@ const CreateChallenge = () => {
                                             margin="normal"
                                             value={courseName}
                                             onChange={(e) => setCourseName(e.target.value)}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            label="Course Details"
+                                            fullWidth
+                                            margin="normal"
+                                            value={courseDetails}
+                                            onChange={(e) => setCourseDetails(e.target.value)}
                                         />
                                     </Grid>
                                     <Button onClick={() => {

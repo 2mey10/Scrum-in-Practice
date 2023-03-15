@@ -112,9 +112,6 @@ function Register() {
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Tutor key" fullWidth margin="normal" value={tutorkey} onChange={(e) => setKey(e.target.value)} />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
                         <FormGroup>
                             <FormControlLabel control={<Checkbox defaultChecked />} label="Ich Stimme der AGBs ab" required/>
                         </FormGroup>
