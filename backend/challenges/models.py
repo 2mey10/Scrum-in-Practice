@@ -44,6 +44,9 @@ class Challenge(models.Model):
     starting_time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
     end_time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
     cover_image = models.ImageField(upload_to='images/', blank=True, null=True)
+    is_human = models.BooleanField(default=False)
+    min_classification= models.IntegerField(null=True)
+    max_classification=models.IntegerField(null=True)
 
     def __str__(self):
         return self.title_text

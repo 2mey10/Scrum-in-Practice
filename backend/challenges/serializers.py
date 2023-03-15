@@ -53,6 +53,9 @@ class QuestionSerializer(WritableNestedModelSerializer):
             'starting_time',
             'end_time',
             'cover_image',
+            'is_human',
+            'min_classification',
+            'max_classification',
 
         )
         model = Challenge
