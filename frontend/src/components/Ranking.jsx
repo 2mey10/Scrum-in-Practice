@@ -117,7 +117,6 @@ function Ranking() {
     const [sortColumn, setSortColumn] = useState('');
     const [sortOrder, setSortOrder] = useState('asc');
     const [selectedChallengeId, setSelectedChallengeId] = useState(null);
-    const [selectedChallenger, setSelectedChallenger] = useState(null);
 
     useEffect(() => {
         const fetchRankings = async () => {
@@ -137,12 +136,12 @@ function Ranking() {
         return 0;
     });
 
-    const handleChallengeIdClick = (challengeId) => {
-        setSelectedChallengeId(selectedChallengeId === challengeId ? null : challengeId);
+    const handleChallengeIdClick = (Cid) => {
+        setSelectedChallengeId(selectedChallengeId === Cid ? null : Cid);
     };
 
     const filteredRanks = selectedChallengeId
-        ? sortedRanks.filter((row) => row.challengeId === selectedChallengeId)
+        ? sortedRanks.filter((row) => row.Challengid === selectedChallengeId)
         : sortedRanks;
 
     const handleSort = (column) => {
@@ -158,14 +157,14 @@ function Ranking() {
         <Table>
             <TableHead>
                 <TableRow>
-                    <TableCell onClick={() => handleSort('challengeId')}>Challenge ID</TableCell>
-                    <TableCell onClick={() => handleSort('userName')}>User Name</TableCell>
-                    <TableCell onClick={() => handleSort('modelName')}>Model Name</TableCell>
-                    <TableCell onClick={() => handleSort('challenger')}>challenger</TableCell>
-                    <TableCell onClick={() => handleSort('accuracy')}>Accuracy</TableCell>
-                    <TableCell onClick={() => handleSort('precision')}>Precision</TableCell>
-                    <TableCell onClick={() => handleSort('recall')}>Recall</TableCell>
-                    <TableCell onClick={() => handleSort('f1')}>F1</TableCell>
+                    <TableCell onClick={() => handleSort('Challengid')}>Challenge ID</TableCell>
+                    <TableCell onClick={() => handleSort('username')}>User Name</TableCell>
+                    <TableCell onClick={() => handleSort('modelname')}>Model Name</TableCell>
+                    <TableCell onClick={() => handleSort('is_human')}>challenger</TableCell>
+                    <TableCell onClick={() => handleSort('Accuracy')}>Accuracy</TableCell>
+                    <TableCell onClick={() => handleSort('Precision')}>Precision</TableCell>
+                    <TableCell onClick={() => handleSort('Recall')}>Recall</TableCell>
+                    <TableCell onClick={() => handleSort('F1')}>F1</TableCell>
                     {/* <TableCell onClick={() => handleSort('iouScore')}>IOU Score</TableCell>
                     <TableCell onClick={() => handleSort('diceScore')}>Dice Score</TableCell> */}
                 </TableRow>
@@ -173,22 +172,22 @@ function Ranking() {
             <TableBody>
                 {filteredRanks.map((row) => (
                     <TableRow key={row.id}>
-                        <TableCell onClick={() => handleChallengeIdClick(row.challengeId)}>
-                            {row.challengeId}
+                        <TableCell onClick={() => handleChallengeIdClick(row.Challengid)}>
+                            {row.Challengid}
                         </TableCell>
-                        <TableCell>{row.userName}</TableCell>
-                        <TableCell>{row.modelName}</TableCell>
+                        <TableCell>{row.username}</TableCell>
+                        <TableCell>{row.modelname}</TableCell>
                         <TableCell>
-                            {row.challenger === "AI" ? (
+                            {row.is_human === false? (
                                 <AndroidIcon fontSize="large" />
                             ) : (
                                 <SentimentVerySatisfiedIcon fontSize="large" />
                             )}
                         </TableCell>
-                        <TableCell>{row.accuracy}</TableCell>
-                        <TableCell>{row.precision}</TableCell>
-                        <TableCell>{row.recall}</TableCell>
-                        <TableCell>{row.f1}</TableCell>
+                        <TableCell>{row.Accuracy}</TableCell>
+                        <TableCell>{row.Precision}</TableCell>
+                        <TableCell>{row.Recall}</TableCell>
+                        <TableCell>{row.F1}</TableCell>
                         {/* <TableCell>{row.iouScore}</TableCell>
                         <TableCell>{row.diceScore}</TableCell> */}
                     </TableRow>
