@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -22,16 +23,15 @@ export const AuthProvider = ({ children }) => {
     const history = useNavigate();
 
     const loginUser = async (username, password) => {
-        const response = await fetch("http://127.0.0.1:8000/api/login/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            data:{
-                username,
-                password
-            }
+        console.log(username)
+        console.log(password)
+        const response = await axios({
+            method: "post",
+            url: "http://127.0.0.1:8000/api/login/",
+            headers: {"Content-Type": "multipart/form-data"},
+            data: {username: username, password: password}
         });
+        console.log(response)
         const data = await response.json();
 
         if (response.status === 200) {
