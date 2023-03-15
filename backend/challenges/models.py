@@ -1,3 +1,4 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
 
 
@@ -35,8 +36,12 @@ class Challenge(models.Model):
 
     description_text = models.CharField(max_length=500)
     title_text = models.CharField(max_length=50)
-    train_dataset_url = models.URLField(blank=True, null=True)
-    test_dataset_url = models.URLField(blank=True, null=True)
+    #train_dataset_url = models.URLField(blank=True, null=True)
+    #test_dataset_url = models.URLField(blank=True, null=True)
+    train_dataset_url = models.FileField(upload_to='traindata/', blank=False, null=False,
+                                         validators=[FileExtensionValidator(allowed_extensions=["zip"])])
+    test_dataset_url = models.FileField(upload_to='testdata/', blank=False, null=False,
+                                        validators=[FileExtensionValidator(allowed_extensions=["zip"])])
     metric_choices = models.ManyToManyField(Metric)
     role_choices = models.ManyToManyField(Roles)
     course_choices = models.ManyToManyField(Courses)
