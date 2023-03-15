@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Checkbox, FormControlLabel, Typography, Container, Grid } from '@mui/material';
+import axios from "axios";
 
 const CreateChallenge = () => {
     // Die listen von Datenbank abrufen hinzufügen.
@@ -91,6 +92,7 @@ const CreateChallenge = () => {
     const handleCreateChallenge = async (event) => {
         console.log("adding challenge...")
         event.preventDefault();
+
         console.log(description,
             title,
             trainDatasetUrl,
@@ -139,9 +141,44 @@ const CreateChallenge = () => {
         setSelectedFileTest(event.target.files[0])
     }
 
+    const handleSubmit = async(event) => {
+        event.preventDefault()
+
+        const body = {description_text: description,
+            title_text: title,
+            train_dataset_url: selectedFileTrain,
+            test_dataset_url: selectedFileTest,
+            metric_choices: selectedmetrics,
+            role_choices: selectedrole,
+            course_choices: selectcourse,
+            starting_time: startingTime,
+            end_time: endTime,
+            cover_image: coverImage,
+            is_human: false,
+            min_classification: 10,
+            max_classification:100
+        }
+
+        try {
+            console.log(body)
+            console.log(body.metric_choices)
+            const response = await axios({
+                method: "post",
+                url:"http://127.0.0.1:8000/api/challenge/",
+                headers: { "Content-Type": "multipart/form-data" },
+                data: body
+            });
+            console.log(response)
+        } catch(error) {
+            console.log("challenge creation failed")
+            console.log(error)
+        }
+
+    }
+
     return (
         <Container maxWidth="sm">
-            <form onSubmit={handleCreateChallenge}>
+            <form onSubmit={handleSubmit}>
                 <Typography variant="h4" align="center" gutterBottom>
                     Create Challenge
                 </Typography>
@@ -295,6 +332,7 @@ const CreateChallenge = () => {
                                     <Button onClick={() => {
                                         console.log(courseName)
                                         handleAddCourse();
+
                                     }} variant="outlined" color="primary">
                                         Add course
                                     </Button>
