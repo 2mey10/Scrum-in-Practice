@@ -18,6 +18,7 @@ from django.urls import path
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
 from registration import views as user_views
+from download import views as FilesViewSet
 
 urlpatterns = [
     
@@ -25,4 +26,5 @@ urlpatterns = [
     path('api/', include('ranking.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('registration.urls')),
+    path('api/', include('download.urls')),
 ]
