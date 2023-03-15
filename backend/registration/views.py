@@ -1,43 +1,38 @@
-from pyexpat.errors import messages
-from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm,LoginForm
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
-
+from django.shortcuts import redirect
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from .models import Usermodel
+from .serializers import UserSerializer, UserLoginSerializer, UserLogoutSerializer,RegisterSerializer
 
 # Create your views here.
+class Record(generics.ListCreateAPIView):
+    # get method handler
+    queryset = Usermodel.objects.all()
+    serializer_class = UserSerializer
 
-def register_view(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
+class RegisterView(generics.CreateAPIView):
+    queryset = Usermodel.objects.all()
+    serializer_class = RegisterSerializer
 
-            messages.success(request, f'Your account has been created. You can log in now!')    
-            return redirect('login')
-    else:
-        form = UserRegistrationForm()
+class Login(generics.GenericAPIView):
+    # get method handler
+    queryset = Usermodel.objects.all()
+    serializer_class = UserLoginSerializer
 
-    context = {'form': form}
-    return render(request, '', context)
-
-
-def login_view(request):
-    form = LoginForm(request.POST or None)
-    msg = None
-    if request.method == 'POST':
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-        else:
-            msg = 'error validating form'
-    return render(request, '', {'form': form, 'msg': msg})
+    def post(self, request, *args, **kwargs):
+        serializer_class = UserLoginSerializer(data=request.data)
+        if serializer_class.is_valid(raise_exception=True):
+            return Response(serializer_class.data, status=HTTP_200_OK)
+        return Response(serializer_class.errors, status=HTTP_400_BAD_REQUEST)
 
 
-@login_required
-def logout_view(request):
-    logout_view(request)
-    messages.info(request, "Logged out successfully!")
-    return redirect('')
+class Logout(generics.GenericAPIView):
+    queryset = Usermodel.objects.all()
+    serializer_class = UserLogoutSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer_class = UserLogoutSerializer(data=request.data)
+        if serializer_class.is_valid(raise_exception=True):
+            return Response(serializer_class.data, status=HTTP_200_OK)
+        return Response(serializer_class.errors, status=HTTP_400_BAD_REQUEST)

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'challenges.apps.ChallengesConfig',
     'ranking.apps.RankingConfig',
     'rest_framework',
+    'registration',
+    
 ]
 
 MIDDLEWARE = [
