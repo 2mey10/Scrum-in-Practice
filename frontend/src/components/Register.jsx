@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, TextField, Button, Typography, Grid, InputLabel, Select, FormControl, FormGroup, FormControlLabel,Checkbox } from '@mui/material';
+import { Container, TextField, Button, Typography, Grid, InputLabel, Select, FormControl, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -62,22 +62,94 @@ function Register() {
                 {error && <Typography variant="body1" color="error" gutterBottom>{error}</Typography>}
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Username" fullWidth margin="normal" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                        <TextField
+                            label="Username"
+                            fullWidth
+                            margin="normal"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            inputProps={{
+                                pattern: "^[a-zA-Z0-9_-]{5,16}$",
+                                title: "Username should be 5-16 characters long and can only contain letters, numbers, underscores, and dashes."
+                            }}
+                        />
+
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Password" fullWidth margin="normal" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        <TextField
+                            label="Password"
+                            fullWidth
+                            margin="normal"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            inputProps={{
+                                pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})",
+                                title: "Password should be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character."
+                            }}
+                        />
+
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Email" fullWidth margin="normal" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        <TextField
+                            label="Email"
+                            fullWidth
+                            margin="normal"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            inputProps={{
+                                pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}",
+                                title: "Please enter a valid email address."
+                            }}
+                        />
+
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Matrikelnummer" fullWidth margin="normal" type="number" value={mNr} onChange={(e) => setMNr(e.target.value)} required />
+                        <TextField
+                            label="Matrikelnummer"
+                            fullWidth
+                            margin="normal"
+                            type="number"
+                            value={mNr}
+                            onChange={(e) => setMNr(e.target.value)}
+                            required
+                            inputProps={{
+                                pattern: "^[0-9]{6}$",
+                                title: "Matrikelnummer should be exactly 6 digits long and can only contain numbers."
+                            }}
+                        />
+
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Name" fullWidth margin="normal" value={name} onChange={(e) => setName(e.target.value)} required />
+                        <TextField
+                            label="Name"
+                            fullWidth
+                            margin="normal"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            inputProps={{
+                                pattern: "^[a-zA-Z ]{2,}$",
+                                title: "Name should contain only letters and be at least 2 characters long."
+                            }}
+                        />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Nachname" fullWidth margin="normal" value={nachname} onChange={(e) => setNachname(e.target.value)} required />
+                    <TextField
+                            label="Nachname"
+                            fullWidth
+                            margin="normal"
+                            value={nachname}
+                            onChange={(e) => setNachname(e.target.value)}
+                            required
+                            inputProps={{
+                                pattern: "^[a-zA-Z ]{2,}$",
+                                title: "Last Name should contain only letters and be at least 2 characters long."
+                            }}
+                        />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField label="Geburtsdatum" fullWidth margin="normal" type="datetime-local" value={gebDatum} InputLabelProps={{ shrink: true }} onChange={(e) => setNachname(e.target.value)} required />
@@ -113,7 +185,15 @@ function Register() {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <FormGroup>
-                            <FormControlLabel control={<Checkbox defaultChecked />} label="Ich Stimme der AGBs ab" required/>
+                            <FormControlLabel
+                                control={<Checkbox defaultChecked />}
+                                label={
+                                    <span>
+                                        Ich stimme der <a href="https://www.ovgu.de/datenschutzerklaerung.html">AGBs</a> zu
+                                    </span>
+                                }
+                                required
+                            />
                         </FormGroup>
                     </Grid>
                 </Grid>
