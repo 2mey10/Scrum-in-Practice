@@ -28,6 +28,7 @@ class Usermodel(AbstractBaseUser):
     birthday = models.DateField(null=True)
     address = models.CharField(max_length=50,null=True)
     DSVG =  models.BooleanField(default=True)
+    is_Tutor = models.BooleanField(default=False)
     
 
     def __str__(self):
