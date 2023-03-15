@@ -10,7 +10,7 @@ function Register() {
     const [nachname, setNachname] = useState('');
     const [gebDatum, setGebDatum] = useState('');
     const [adresse, setAdresse] = useState('');
-    const [austausch, setAustausch] = useState(false);
+    const [austausch, setAustausch] = useState('');
     const [studiengang, setStudiengang] = useState('');
     const [prüfungsordnung, setPrüfungsordnung] = useState('');
     const [anrechnung_des_Moduls, setAnrechnung_des_Moduls] = useState('');
@@ -20,24 +20,25 @@ function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-
-        const response = await fetch('/api/register', {
+        console.log(username,password,email,mNr,name,nachname,adresse,austausch,gebDatum.slice(0, 10),studiengang,prüfungsordnung,anrechnung_des_Moduls)
+        const response = await fetch('http://127.0.0.1:8000/api/register/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username,
-                password,
-                email,
-                mNr,
-                name,
-                nachname,
-                adresse,
-                austausch,
-                studiengang,
-                prüfungsordnung,
-                anrechnung_des_Moduls
+                username: username,
+                firstname:name,
+                lastname:nachname,
+                matriculationnumber:mNr,
+                studentstatus:austausch,
+                Courseofstudies:studiengang,
+                exsam:prüfungsordnung,
+                email:email,
+                password:password,
+                birthday:gebDatum.slice(0, 10),
+                address:adresse,
+                creditingofthemodule:anrechnung_des_Moduls
             })
         });
 
@@ -84,10 +85,10 @@ function Register() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            inputProps={{
-                                pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})",
-                                title: "Password should be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character."
-                            }}
+                            // inputProps={{
+                            //     pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})",
+                            //     title: "Password should be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character."
+                            // }}
                         />
 
                     </Grid>
@@ -137,7 +138,7 @@ function Register() {
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                    <TextField
+                        <TextField
                             label="Nachname"
                             fullWidth
                             margin="normal"
@@ -157,13 +158,46 @@ function Register() {
                         <TextField label="Adresse" fullWidth margin="normal" value={adresse} onChange={(e) => setAdresse(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Studiengang" fullWidth margin="normal" value={studiengang} onChange={(e) => setStudiengang(e.target.value)} required />
+                        <TextField
+                            label="Studiengang"
+                            fullWidth
+                            margin="normal"
+                            value={studiengang}
+                            onChange={(e) => setStudiengang(e.target.value)}
+                            required
+                            inputProps={{
+                                pattern: "^[a-zA-Z ]{2,}$",
+                                title: "The field of study should contain only letters and be at least 2 characters long."
+                            }}
+                        />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Prüfungsordnung" fullWidth margin="normal" value={prüfungsordnung} onChange={(e) => setPrüfungsordnung(e.target.value)} required />
+                        <TextField
+                            label="Prüfungsordnung"
+                            fullWidth
+                            margin="normal"
+                            value={prüfungsordnung}
+                            onChange={(e) => setPrüfungsordnung(e.target.value)}
+                            required
+                            inputProps={{
+                                pattern: "^[a-zA-Z ]{2,}$",
+                                title: "The Examination regulations should contain only letters and be at least 2 characters long."
+                            }}
+                        />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Anrechnung des Moduls" fullWidth margin="normal" value={anrechnung_des_Moduls} onChange={(e) => setAnrechnung_des_Moduls(e.target.value)} required />
+                        <TextField
+                            label="Anrechnung des Moduls"
+                            fullWidth
+                            margin="normal"
+                            value={anrechnung_des_Moduls}
+                            onChange={(e) => setAnrechnung_des_Moduls(e.target.value)}
+                            required
+                            inputProps={{
+                                pattern: "^[a-zA-Z ]{2,}$",
+                                title: "The Crediting of the module should contain only letters and be at least 2 characters long."
+                            }}
+                        />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <FormControl fullWidth margin="normal">
@@ -177,8 +211,8 @@ function Register() {
                                     id: 'austausch-select',
                                 }}
                             >
-                                <option value={false}>No</option>
-                                <option value={true}>Yes</option>
+                                <option value={'Extern'}>No</option>
+                                <option value={'Intern'}>Yes</option>
                             </Select>
                         </FormControl>
                     </Grid>
