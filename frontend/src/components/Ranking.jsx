@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import AndroidIcon from '@mui/icons-material/Android';
+
 
 
 function Ranking() {
@@ -9,6 +12,7 @@ function Ranking() {
             id: 1,
             challengeId: 'CH-001',
             userName: 'John Doe',
+            challenger: 'AI',
             modelName: 'Model A',
             accuracy: 0.8,
             precision: 0.7,
@@ -21,6 +25,7 @@ function Ranking() {
             id: 2,
             challengeId: 'CH-001',
             userName: 'John Doe',
+            challenger: 'AI',
             modelName: 'Model A',
             accuracy: 0.8,
             precision: 0.7,
@@ -33,6 +38,7 @@ function Ranking() {
             id: 3,
             challengeId: 'CH-002',
             userName: 'John Doe',
+            challenger: 'AI',
             modelName: 'Model A',
             accuracy: 0.8,
             precision: 0.7,
@@ -45,6 +51,7 @@ function Ranking() {
             id: 4,
             challengeId: 'CH-002',
             userName: 'Jane Smith',
+            challenger: 'AI',
             modelName: 'Model B',
             accuracy: 0.9,
             precision: 0.8,
@@ -57,6 +64,7 @@ function Ranking() {
             id: 5,
             challengeId: 'CH-003',
             userName: 'Bob Johnson',
+            challenger: 'AI',
             modelName: 'Model C',
             // accuracy: 0,
             // precision: 0,
@@ -65,11 +73,51 @@ function Ranking() {
             iouScore: 0.75,
             diceScore: 0.85,
         },
+        {
+            id: 6,
+            challengeId: 'CH-003',
+            userName: 'Bob Johnson',
+            challenger: 'Human',
+            // modelName: 'Model C',
+            // accuracy: 0,
+            // precision: 0,
+            // recall: 0,
+            // f1: 0,
+            iouScore: 0.75,
+            diceScore: 0.85,
+        },
+        {
+            id: 7,
+            challengeId: 'CH-003',
+            userName: 'Bob Johnson',
+            challenger: 'Human',
+            // modelName: 'Model C',
+            // accuracy: 0,
+            // precision: 0,
+            // recall: 0,
+            // f1: 0,
+            iouScore: 0.75,
+            diceScore: 0.85,
+        },
+        {
+            id: 8,
+            challengeId: 'CH-003',
+            userName: 'Bob Johnson',
+            challenger: 'Human',
+            // modelName: 'Model C',
+            accuracy: 0.6,
+            precision: 0.4,
+            recall: 0.4,
+            f1: 0.5,
+            // iouScore: 0.75,
+            // diceScore: 0.85,
+        },
     ])
 
     const [sortColumn, setSortColumn] = useState('');
     const [sortOrder, setSortOrder] = useState('asc');
     const [selectedChallengeId, setSelectedChallengeId] = useState(null);
+    const [selectedChallenger, setSelectedChallenger] = useState(null);
 
     const sortedRanks = ranks.slice().sort((a, b) => {
         const aValue = a[sortColumn];
@@ -81,7 +129,7 @@ function Ranking() {
 
     const handleChallengeIdClick = (challengeId) => {
         setSelectedChallengeId(selectedChallengeId === challengeId ? null : challengeId);
-    };    
+    };
 
     const filteredRanks = selectedChallengeId
         ? sortedRanks.filter((row) => row.challengeId === selectedChallengeId)
@@ -103,6 +151,7 @@ function Ranking() {
                     <TableCell onClick={() => handleSort('challengeId')}>Challenge ID</TableCell>
                     <TableCell onClick={() => handleSort('userName')}>User Name</TableCell>
                     <TableCell onClick={() => handleSort('modelName')}>Model Name</TableCell>
+                    <TableCell onClick={() => handleSort('challenger')}>challenger</TableCell>
                     <TableCell onClick={() => handleSort('accuracy')}>Accuracy</TableCell>
                     <TableCell onClick={() => handleSort('precision')}>Precision</TableCell>
                     <TableCell onClick={() => handleSort('recall')}>Recall</TableCell>
@@ -119,6 +168,13 @@ function Ranking() {
                         </TableCell>
                         <TableCell>{row.userName}</TableCell>
                         <TableCell>{row.modelName}</TableCell>
+                        <TableCell>
+                            {row.challenger === "AI" ? (
+                                <AndroidIcon fontSize="large" />
+                            ) : (
+                                <SentimentVerySatisfiedIcon fontSize="large" />
+                            )}
+                        </TableCell>
                         <TableCell>{row.accuracy}</TableCell>
                         <TableCell>{row.precision}</TableCell>
                         <TableCell>{row.recall}</TableCell>
