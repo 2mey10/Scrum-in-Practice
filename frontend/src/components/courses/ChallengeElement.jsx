@@ -37,10 +37,6 @@ function DetailedChallenge(props) {
         metrics.push(metric.metric_name)
     })
 
-    function submitRequest(){
-        console.log("Submitting data to the api ;)")
-    }
-
     // a local state to store the currently selected file.
     const [selectedFile, setSelectedFile] = React.useState(null);
 
@@ -48,14 +44,11 @@ function DetailedChallenge(props) {
     const baseURL = "http://127.0.0.1:8000/api/"
     const handleSubmit = async(event) => {
         event.preventDefault()
-        const formData = new FormData();
-        formData.append("ml_model", selectedFile);
         let first_respone = {}
         try {
             const response = await axios({
                 method: "post",
                 url: baseURL+"mlmodel/",
-                //data: formData,
                 headers: { "Content-Type": "multipart/form-data" },
                 data: {
                     ml_model: selectedFile

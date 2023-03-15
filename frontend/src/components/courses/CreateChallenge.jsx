@@ -70,6 +70,7 @@ const CreateChallenge = () => {
 
     const handleAddCourse = async (event) => {
         try {
+
             const response = await fetch('http://127.0.0.1:8000/api/courses/', {
                 method: 'POST',
                 headers: {
@@ -88,6 +89,7 @@ const CreateChallenge = () => {
         }
     };
     const handleCreateChallenge = async (event) => {
+        console.log("adding challenge...")
         event.preventDefault();
         console.log(description,
             title,
@@ -99,6 +101,7 @@ const CreateChallenge = () => {
             startingTime,
             endTime,
             coverImage)
+
         try {
             const response = await fetch('http://127.0.0.1:8000/api/challenge/', {
                 method: 'POST',
@@ -120,9 +123,21 @@ const CreateChallenge = () => {
             });
             console.log(response);
         } catch (error) {
+            console.log("error!!")
             console.log(error);
         }
     };
+
+    const [selectedFileTrain, setSelectedFileTrain] = React.useState(null);
+    const [selectedFileTest, setSelectedFileTest] = React.useState(null);
+
+
+    const handleFileSelectTrain = (event) => {
+        setSelectedFileTrain(event.target.files[0])
+    }
+    const handleFileSelectTest = (event) => {
+        setSelectedFileTest(event.target.files[0])
+    }
 
     return (
         <Container maxWidth="sm">
@@ -147,22 +162,20 @@ const CreateChallenge = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField
-                            label="Training Dataset URL"
-                            fullWidth
-                            margin="normal"
-                            value={trainDatasetUrl}
-                            onChange={(e) => setTrainDatasetUrl(e.target.value)}
-                        />
+                        <Typography variant="h6">
+                            Testing Set
+                        </Typography>
+                        <form style={{paddingTop:"70px"}}>
+                            <input type="file" onChange={handleFileSelectTrain}/>
+                        </form>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField
-                            label="Test Dataset URL"
-                            fullWidth
-                            margin="normal"
-                            value={testDatasetUrl}
-                            onChange={(e) => setTestDatasetUrl(e.target.value)}
-                        />
+                        <Typography>
+                            Testing Set
+                        </Typography>
+                        <form style={{paddingTop:"70px"}}>
+                            <input type="file" onChange={handleFileSelectTest}/>
+                        </form>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
