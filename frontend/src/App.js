@@ -17,23 +17,29 @@ import CreateChallenge from './components/courses/CreateChallenge';
 import CoursesOverview from "./components/courses/CoursesOverview";
 import CourseOverview from "./components/courses/CourseOverview";
 import Ranking from './components/Ranking';
+import AuthContext, {AuthProvider} from "./context/AuthContext";
+import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
 
 function App() {
   return (
     <div className="App">
-
-        <Navbar/>
         <Router>
-            <Routes>
-                <Route element={<CoursesOverview/>} path="/courses"/>
-                <Route element={<CourseOverview />} path="/courses/:courseID"/>
-                <Route element={<Login />} path="/login" />
-                <Route element={<Register />} path="/register" />
-                <Route element={<ToBeImplemented/>} path="/register" />
-                <Route element={<CreateChallenge/>} path="/CreateChallenge" />
-                <Route element={<Ranking/>} path="/ranking" />
-                <Route element={<Home />} path="/" />
-            </Routes>
+            <AuthProvider>
+                <Navbar/>
+                    <Routes>
+                        <Route element={<CoursesOverview/>} path="/courses"/>
+                        <Route element={<CourseOverview />} path="/courses/:courseID"/>
+                        {/*<Route element={<Login />} path="/login" />*/}
+                        {/*<Route element={<Register />} path="/register" />*/}
+                        <Route element={<LoginPage />} path="/login" />
+                        <Route element={<RegisterPage />} path="/register" />
+                        <Route element={<ToBeImplemented/>} path="/register" />
+                        <Route element={<CreateChallenge/>} path="/CreateChallenge" />
+                        <Route element={<Ranking/>} path="/ranking" />
+                        <Route element={<Home />} path="/" />
+                    </Routes>
+            </AuthProvider>
         </Router>
     </div>
   );

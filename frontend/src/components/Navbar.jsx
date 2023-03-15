@@ -7,12 +7,57 @@ import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import { BrowserRouter as Router } from "react-router-dom";
+import {useContext} from "react";
+import AuthContext from "../context/AuthContext";
+import Box from "@mui/material/Box";
 
-const pages_logged_in = ['Courses',"Logut",'CreateChallenge','Ranking'];
+const pages_logged_in = ['Courses','CreateChallenge','Ranking'];
 const pages_logged_out = ['Courses', 'Login','Register','CreateChallenge','Ranking'];
 const applicationName = "Machine Learning Meisterschaft Magdeburg"
 function ResponsiveAppBar() {
-    const user = false;
+    // const user = false;
+    const { user, logoutUser } = useContext(AuthContext);
+    console.log(user)
+
+    const navbar_style = {
+            mr: 2,
+            display: { xs: 'flex', md: 'none' },
+            flexGrow: 1,
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+            color: 'inherit',
+            textDecoration: 'none',
+    }
+
+    const fetchLoginStatus = () => {
+        return user?(
+
+            <>
+                <Button
+                    key={"Logout"}
+                    onClick={logoutUser}
+                    sx={{ my: 2, color: '#063970', display: 'block' }}
+                >
+                    {"Logout"}
+                </Button>
+                <Box>
+                    <Typography>
+                        Logged in
+                    </Typography>
+                </Box>
+            </>) : (
+            <>
+                <Box >
+                    <Typography>
+                        Logged out
+                    </Typography>
+                </Box>
+
+            </>
+        )
+    }
+
 
     return (
         <AppBar position="static">
@@ -38,7 +83,7 @@ function ResponsiveAppBar() {
                     </Typography>
 
                     {/*show pages*/}
-                    <Router>
+                    {/*<Router>*/}
                         {user ? pages_logged_in.map((page) => (
                             <Button
                                 key={page}
@@ -59,7 +104,7 @@ function ResponsiveAppBar() {
                             </Button>
                         ))}
 
-                    </Router>
+                    {/*</Router>*/}
 
 
 
@@ -69,19 +114,11 @@ function ResponsiveAppBar() {
                         noWrap
                         component="a"
                         href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
+                        sx={navbar_style}
                     >
                         TEST
                     </Typography>
+                    {fetchLoginStatus()}
                 </Toolbar>
             </Container>
         </AppBar>
