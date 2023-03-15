@@ -7,6 +7,9 @@ const LoginPage = () => {
         e.preventDefault();
         const username = e.target.username.value;
         const password = e.target.password.value;
+        console.log("trying to log in")
+        console.log(username)
+        console.log(password)
         username.length > 0 && loginUser(username, password);
     };
 

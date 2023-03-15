@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { Container, TextField, Button, Typography, Grid, InputLabel, Select, FormControl, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
+import AuthContext from "../context/AuthContext";
 
 function Register() {
+
+    const { registerUser } = useContext(AuthContext);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -14,8 +18,16 @@ function Register() {
     const [studiengang, setStudiengang] = useState('');
     const [prüfungsordnung, setPrüfungsordnung] = useState('');
     const [anrechnung_des_Moduls, setAnrechnung_des_Moduls] = useState('');
+
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    const handleSubmit = async e => {
+        console.log("registrating...")
+        e.preventDefault();
+        registerUser(username, password, email,mNr,name,nachname,adresse,austausch,gebDatum,studiengang,prüfungsordnung,
+            anrechnung_des_Moduls,);
+    };
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -55,7 +67,7 @@ function Register() {
 
     return (
         <Container maxWidth="sm">
-            <form onSubmit={handleRegister}>
+            <form onSubmit={handleSubmit}>
                 <Typography variant="h4" align="center" gutterBottom>
                     Register
                 </Typography>
@@ -220,6 +232,7 @@ function Register() {
                         <FormGroup>
                             <FormControlLabel
                                 control={<Checkbox defaultChecked />}
+                                disabled={true}
                                 label={
                                     <span>
                                         Ich stimme der <a href="https://www.ovgu.de/datenschutzerklaerung.html">AGBs</a> zu

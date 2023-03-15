@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'ranking.apps.RankingConfig',
     'rest_framework',
     'registration',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
 
 ]
 
@@ -104,6 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "registration.Usermodel"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

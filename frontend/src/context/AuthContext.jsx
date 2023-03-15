@@ -44,20 +44,35 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const registerUser = async (username, password, password2) => {
+    const registerUser = async (username, password, email,mNr,name,nachname,adresse,austausch,gebDatum,studiengang,prüfungsordnung,
+                                anrechnung_des_Moduls,) => {
+        const body = {
+            username: username,
+            firstname:name,
+            lastname:nachname,
+            matriculationnumber:mNr,
+            studentstatus:austausch,
+            Courseofstudies:studiengang,
+            exsam:prüfungsordnung,
+            email:email,
+            password:password,
+            birthday:gebDatum.slice(0, 10),
+            address:adresse,
+            creditingofthemodule:anrechnung_des_Moduls
+        }
         const response = await fetch("http://127.0.0.1:8000/api/register/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                username,
-                password,
-                password2
-            })
+            body: JSON.stringify(body)
         });
         if (response.status === 201) {
+
             history("/login");
+            console.log("registrated with following data:")
+            console.log(body)
+            console.log(response)
         } else {
             alert("Something went wrong!");
         }
