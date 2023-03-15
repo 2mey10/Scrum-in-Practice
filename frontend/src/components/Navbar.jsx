@@ -17,7 +17,7 @@ import {useNavigate} from 'react-router-dom';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 const pages = ['Courses', 'Login','Register','CreateChallenge','Ranking'];
-const applicationName = "App Name"
+const applicationName = "Machine Learning Meisterschaft Magdeburg"
 function ResponsiveAppBar() {
 
     return (

@@ -6,9 +6,8 @@ from challenges.models import Metric
 
 
 class MlModel(models.Model):
-    ml_model = models.FileField(upload_to='mlmodels/', blank=True, null=True,
+    ml_model = models.FileField(upload_to='mlmodels/', blank=False, null=False,
                                 validators=[FileExtensionValidator(allowed_extensions=["onnx"])])
-
     def __str__(self):
         return "ml_model"
 

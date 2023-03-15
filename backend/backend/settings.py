@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'ranking.apps.RankingConfig',
     'rest_framework',
     'registration',
-    
+
 ]
 
 MIDDLEWARE = [

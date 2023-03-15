@@ -41,8 +41,6 @@ function CourseElement(props) {
 
 
 function CoursesOverview() {
-    const courses_ = [1,2,3,4,5]
-    const challenges_ = [1,2,3,4,5,6,7]
 
     const baseURL = "http://127.0.0.1:8000/api/"
     const [courses, setCourses] = useState([]);

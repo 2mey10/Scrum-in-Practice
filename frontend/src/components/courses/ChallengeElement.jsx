@@ -49,15 +49,46 @@ function DetailedChallenge(props) {
     const handleSubmit = async(event) => {
         event.preventDefault()
         const formData = new FormData();
-        formData.append("selectedFile", selectedFile);
+        formData.append("ml_model", selectedFile);
+        let first_respone = {}
         try {
             const response = await axios({
                 method: "post",
                 url: baseURL+"mlmodel/",
-                data: formData,
+                //data: formData,
                 headers: { "Content-Type": "multipart/form-data" },
+                data: {
+                    ml_model: selectedFile
+                }
             });
+            console.log("uploaded model!")
+            console.log(response)
+            first_respone = response;
         } catch(error) {
+            console.log("model upload failed")
+            console.log(error)
+        }
+
+        console.log(first_respone.data)
+        let body = {
+                ml_model_id: first_respone.data.id,
+                challenge_id: props.data.id,
+                username: "dummy"
+            }
+        console.log("second request with:")
+        console.log(body)
+        try {
+            const response = await axios({
+                method: "post",
+                url: baseURL+"obviouslynotworking/",
+                //data: formData,
+                headers: { "Content-Type": "multipart/form-data" },
+                data: body
+            });
+            console.log("pinged second endpoint and started evaluation!")
+            console.log(response)
+        } catch(error) {
+            console.log("second endpoint was not reached")
             console.log(error)
         }
     }
