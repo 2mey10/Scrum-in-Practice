@@ -14,7 +14,6 @@ function Register() {
     const [studiengang, setStudiengang] = useState('');
     const [prüfungsordnung, setPrüfungsordnung] = useState('');
     const [anrechnung_des_Moduls, setAnrechnung_des_Moduls] = useState('');
-    const [tutorkey, setKey] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -45,7 +44,7 @@ function Register() {
         setIsLoading(false);
 
         if (response.ok) {
-            // redirect to success page or show success message
+            window.location.href = '/login';
         } else {
             const data = await response.json();
             setError(data.message);
@@ -101,7 +100,7 @@ function Register() {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                             inputProps={{
-                                pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}",
+                                pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}",
                                 title: "Please enter a valid email address."
                             }}
                         />
@@ -152,7 +151,7 @@ function Register() {
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField label="Geburtsdatum" fullWidth margin="normal" type="datetime-local" value={gebDatum} InputLabelProps={{ shrink: true }} onChange={(e) => setNachname(e.target.value)} required />
+                        <TextField label="Geburtsdatum" fullWidth margin="normal" type="datetime-local" value={gebDatum} InputLabelProps={{ shrink: true }} onChange={(e) => setGebDatum(e.target.value)} required />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField label="Adresse" fullWidth margin="normal" value={adresse} onChange={(e) => setAdresse(e.target.value)} required />

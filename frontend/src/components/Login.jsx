@@ -18,7 +18,12 @@ function Login() {
             },
             body: JSON.stringify({ username, password })
         });
-
+        if (response.ok) {
+            window.location.href = '/courses';
+        } else {
+            const data = await response.json();
+            setError(data.message);
+        }
         setIsLoading(false);
     }
 
