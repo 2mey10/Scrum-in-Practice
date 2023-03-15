@@ -38,7 +38,7 @@ function ResponsiveAppBar() {
                     </Typography>
 
                     {/*show pages*/}
-                    <Router>
+                    {/*<Router>*/}
                         {user ? pages_logged_in.map((page) => (
                             <Button
                                 key={page}
@@ -59,7 +59,7 @@ function ResponsiveAppBar() {
                             </Button>
                         ))}
 
-                    </Router>
+                    {/*</Router>*/}
 
 
 

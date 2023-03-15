@@ -35,6 +35,7 @@ class Challenge(models.Model):
     #     RECALL = "3", "recall"
 
     description_text = models.CharField(max_length=500)
+
     title_text = models.CharField(max_length=50)
     #train_dataset_url = models.URLField(blank=True, null=True)
     #test_dataset_url = models.URLField(blank=True, null=True)

@@ -1,7 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Checkbox, FormControlLabel, Typography, Container, Grid } from '@mui/material';
+import {
+    TextField,
+    Button,
+    Checkbox,
+    FormControlLabel,
+    Typography,
+    Container,
+    Grid,
+    Snackbar,
+    IconButton
+} from '@mui/material';
 import axios from "axios";
+import * as PropTypes from "prop-types";
 
+function CloseIcon(props) {
+    return null;
+}
+
+CloseIcon.propTypes = {fontSize: PropTypes.string};
 const CreateChallenge = () => {
     // Die listen von Datenbank abrufen hinzufügen.
 
@@ -169,12 +185,43 @@ const CreateChallenge = () => {
                 data: body
             });
             console.log(response)
+            handleClick();
         } catch(error) {
             console.log("challenge creation failed")
+            handleClick();
             console.log(error)
         }
 
     }
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    const action = (
+        <React.Fragment>
+            <Button color="secondary" size="small" onClick={handleClose}>
+                OK
+            </Button>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+            >
+                <CloseIcon fontSize="small" />
+            </IconButton>
+        </React.Fragment>
+    );
 
     return (
         <Container maxWidth="sm">
@@ -358,6 +405,13 @@ const CreateChallenge = () => {
                         <Button type="submit" variant="contained" color="primary">
                             Create Challenge
                         </Button>
+                        <Snackbar
+                            open={open}
+                            autoHideDuration={3000}
+                            onClose={handleClose}
+                            message="Challenge erstellt"
+                            action={action}
+                        />
                     </Grid>
                 </Grid>
             </form>

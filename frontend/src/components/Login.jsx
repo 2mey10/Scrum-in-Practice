@@ -1,6 +1,7 @@
 import React, { useState, createContext,useEffect} from 'react';
 import jwt_decode from "jwt-decode";
 import { Container, TextField, Button, Typography } from '@mui/material';
+import axios from "axios";
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -11,19 +12,19 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-
-        const response = await fetch('http://127.0.0.1:8000/api/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username:username, password:password })
-        });
-        if (response.ok) {
-            window.location.href = '/courses';
-        } else {
-            const data = await response.json();
-            setError(data.message);
+        console.log("trying to log in")
+        try {
+            const response = await axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/login/",
+                headers: {"Content-Type": "multipart/form-data"},
+                data: {username: username, password: password}
+            });
+            console.log(response.data);
+        }
+        catch(error) {
+            console.log("login failed")
+            console.log(error)
             alert("Worng user name or password please try again")
         }
         setIsLoading(false);

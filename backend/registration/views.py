@@ -3,7 +3,10 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from .models import Usermodel
-from .serializers import UserSerializer, UserLoginSerializer, UserLogoutSerializer,RegisterSerializer
+from .serializers import UserSerializer, UserLoginSerializer, UserLogoutSerializer, RegisterSerializer
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 # Create your views here.
 class Record(generics.ListCreateAPIView):
@@ -11,9 +14,11 @@ class Record(generics.ListCreateAPIView):
     queryset = Usermodel.objects.all()
     serializer_class = UserSerializer
 
+
 class RegisterView(generics.CreateAPIView):
     queryset = Usermodel.objects.all()
     serializer_class = RegisterSerializer
+
 
 class Login(generics.GenericAPIView):
     # get method handler

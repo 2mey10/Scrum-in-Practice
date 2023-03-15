@@ -17,18 +17,18 @@ class Usermodel(AbstractBaseUser):
     firstname = models.CharField(max_length=255, null=True)
     lastname = models.CharField(max_length=255, null=True)
     matriculationnumber = models.IntegerField(null=True)
-    studentstatus = models.CharField(max_length=1, choices=STATUS)
+    studentstatus = models.CharField(max_length=1, choices=STATUS,null=True)
     Courseofstudies = models.CharField(max_length=50,null=True)
     exsam = models.CharField(max_length=50,null=True)
     creditingofthemodule = models.CharField(max_length=50,null=True)
-    email = models.EmailField(max_length=255, null=False)
+    email = models.EmailField(max_length=255, null=True)
     password = models.CharField(max_length=50)
     ifLogged = models.BooleanField(default=False)
     token = models.CharField(max_length=500, null=True, default="")
     birthday = models.DateField(null=True)
     address = models.CharField(max_length=50,null=True)
     DSVG =  models.BooleanField(default=True)
-    is_Tutor = models.BooleanField(default=False)
+    is_Tutor = models.BooleanField(default=True)
     
 
     def __str__(self):
