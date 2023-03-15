@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, createContext,useEffect} from 'react';
+import jwt_decode from "jwt-decode";
 import { Container, TextField, Button, Typography } from '@mui/material';
 
 function Login() {
@@ -11,18 +12,19 @@ function Login() {
         e.preventDefault();
         setIsLoading(true);
 
-        const response = await fetch('/api/login', {
+        const response = await fetch('http://127.0.0.1:8000/api/login/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ username:username, password:password })
         });
         if (response.ok) {
             window.location.href = '/courses';
         } else {
             const data = await response.json();
             setError(data.message);
+            alert("Worng user name or password please try again")
         }
         setIsLoading(false);
     }
