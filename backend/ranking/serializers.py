@@ -17,9 +17,15 @@ class RankingEntrySerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
+            'model_ref',
             'username',
-            'metric_name',
-            'metric_value',
+            'Challengid',
+            'modelname',
+            'Accuracy',
+            'Precision',
+            'Recall',
+            'F1',
             'is_human',
+
         )
         model = RankingEntry
