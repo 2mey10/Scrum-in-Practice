@@ -9,18 +9,19 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from .models import Usermodel
 from .serializers import MyTokenObtainPairSerializer, RegisterSerializer
-# Create your views here.
 
+
+# Create your views here.
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
+
 class RegisterView(generics.CreateAPIView):
     queryset = Usermodel.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
-
 
 # class Record(generics.ListCreateAPIView):
 #     # get method handler

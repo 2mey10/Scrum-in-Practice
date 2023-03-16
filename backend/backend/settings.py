@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'registration',
     'rest_framework.authtoken',
-    'rest_auth',
     'django.contrib.sites',
 
 ]
