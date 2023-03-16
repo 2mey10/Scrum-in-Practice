@@ -72,6 +72,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['username'] = user.username
         token['email'] = user.email
         token['firstname'] = user.firstname
+        token['tutortoken'] = user.tutortoken
         # ...
         return token
 
@@ -98,6 +99,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     studentstatus = serializers.ChoiceField(
         choices=['Intern', 'Extern'])
     creditingofthemodule = serializers.CharField(max_length=50)
+    tutortoken = serializers.CharField(max_length=50)
     # DSVG = serializers.BooleanField(default=True)
 
     class Meta:
@@ -113,7 +115,8 @@ class RegisterSerializer(serializers.ModelSerializer):
                   'password',
                   'birthday',
                   'address',
-                  'creditingofthemodule',)
+                  'creditingofthemodule',
+                  'tutortoken')
 
     def validate(self, attrs):
         return attrs
@@ -132,6 +135,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             birthday=validated_data['birthday'],
             address=validated_data['address'],
             creditingofthemodule=validated_data['creditingofthemodule'],
+            tutortoken=validated_data['tutortoken']
         )
         user.set_password(validated_data["password"])
         user.save()

@@ -18,6 +18,7 @@ function Register() {
     const [studiengang, setStudiengang] = useState('');
     const [prüfungsordnung, setPrüfungsordnung] = useState('');
     const [anrechnung_des_Moduls, setAnrechnung_des_Moduls] = useState('');
+    const [tutorToken,settutorToken] = useState('')
 
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +27,7 @@ function Register() {
         console.log("registrating...")
         e.preventDefault();
         registerUser(username, password, email,mNr,name,nachname,adresse,austausch,gebDatum,studiengang,prüfungsordnung,
-            anrechnung_des_Moduls,);
+            anrechnung_des_Moduls,tutorToken);
     };
 
     const handleRegister = async (e) => {
@@ -209,6 +210,15 @@ function Register() {
                                 pattern: "^[a-zA-Z ]{2,}$",
                                 title: "The Crediting of the module should contain only letters and be at least 2 characters long."
                             }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            label="Tutorschlüssel"
+                            fullWidth
+                            margin="normal"
+                            value={tutorToken}
+                            onChange={(e) => settutorToken(e.target.value)}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>

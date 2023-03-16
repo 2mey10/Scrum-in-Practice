@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const registerUser = async (username, password, email,mNr,name,nachname,adresse,austausch,gebDatum,studiengang,prüfungsordnung,
-                                anrechnung_des_Moduls,) => {
+                                anrechnung_des_Moduls,tutor_token) => {
         const body = {
             username: username,
             firstname:name,
@@ -58,8 +58,11 @@ export const AuthProvider = ({ children }) => {
             password:password,
             birthday:gebDatum.slice(0, 10),
             address:adresse,
-            creditingofthemodule:anrechnung_des_Moduls
+            creditingofthemodule:anrechnung_des_Moduls,
+            tutortoken:tutor_token
         }
+        console.log("trying to register")
+        console.log(body)
         const response = await fetch("http://127.0.0.1:8000/api/register/", {
             method: "POST",
             headers: {

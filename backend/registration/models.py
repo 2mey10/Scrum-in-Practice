@@ -60,7 +60,7 @@ class Usermodel(AbstractUser):
     birthday = models.DateField(null=True)
     address = models.CharField(max_length=50, null=True)
     DSVG = models.BooleanField(default=True)
-    is_Tutor = models.BooleanField(default=False)
+    tutortoken = models.CharField(max_length=50,null=True,default="")
 
     # objects = MyUserManager()
     def __str__(self):
