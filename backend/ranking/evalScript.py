@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader
 from torchmetrics.classification import F1Score
 from torchmetrics.classification import Precision
 from torchmetrics.classification import Recall
+from sklearn.metrics import f1_score,accuracy_score,precision_score,recall_score
 
 
 # needed arguments from frontend:
@@ -104,17 +105,14 @@ def evaluate_model(model_path, test_data_loader, task):
         performance_scores["accuracy"] = acc
 
         # F1 score
-        f1_metric = F1Score(task="multiclass", num_classes=n_classes)
-        f1_score = round(f1_metric(preds, target).item(), 4)
-        performance_scores["F1"] = f1_score
+        f1_score_val = f1_score(y_true=target.detach().numpy(),y_pred=preds.detach().numpy(), average='weighted')
+        performance_scores["F1"] = round(f1_score_val,4)
 
-        precision_metric = Precision(task="multiclass", average='macro', num_classes=n_classes)
-        precision_score = round(precision_metric(preds, target).item(), 4)
-        performance_scores["precision"] = precision_score
+        precision_score_value = round(precision_score(y_true=target.detach().numpy(),y_pred=preds.detach().numpy(), average='weighted'), 4)
+        performance_scores["precision"] = precision_score_value
 
-        recall_metric = Recall(task="multiclass", average='macro', num_classes=n_classes)
-        recall_score = round(recall_metric(preds, target).item(), 4)
-        performance_scores["recall"] = recall_score
+        recall_score_value = round(recall_score(y_true=target.detach().numpy(),y_pred=preds.detach().numpy(), average='weighted'), 4)
+        performance_scores["recall"] = recall_score_value
 
     elif task == "Segmentierung":
         y_pred, y_true = segment_test_data(ort_session, test_data_loader)
