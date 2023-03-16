@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { TextField, Button, Checkbox, FormControlLabel, Typography, Container, Grid } from '@mui/material';
 import axios from "axios";
+import AuthContext from "../../context/AuthContext";
 
 const CreateChallenge = () => {
+
+
+
     // Die listen von Datenbank abrufen hinzufügen.
 
     const [title, setTitle] = useState('');
@@ -86,46 +90,6 @@ const CreateChallenge = () => {
             setEditCourse(false);
             window.location.reload(false);
         } catch (error) {
-            console.log(error);
-        }
-    };
-    const handleCreateChallenge = async (event) => {
-        console.log("adding challenge...")
-        event.preventDefault();
-
-        console.log(description,
-            title,
-            trainDatasetUrl,
-            testDatasetUrl,
-            selectedmetrics,
-            selectedrole,
-            selectcourse,
-            startingTime,
-            endTime,
-            coverImage)
-
-        try {
-            const response = await fetch('http://127.0.0.1:8000/api/challenge/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    description_text: description,
-                    title_text: title,
-                    train_dataset_url: trainDatasetUrl,
-                    test_dataset_url: testDatasetUrl,
-                    metric_choices: selectedmetrics,
-                    role_choices: selectedrole,
-                    course_choices: selectcourse,
-                    starting_time: startingTime,
-                    end_time: endTime,
-                    cover_image: coverImage
-                })
-            });
-            console.log(response);
-        } catch (error) {
-            console.log("error!!")
             console.log(error);
         }
     };

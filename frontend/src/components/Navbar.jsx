@@ -41,23 +41,8 @@ function ResponsiveAppBar() {
         else {
             return user_pages_logged_in
         }
+    }
 
-    }
-    const showTutorPages = () => {
-        return (user.tutortoken==="tutor")?(
-            user_pages_logged_in.map((page) =>(
-                <Button
-                    key={page}
-                    component="a"
-                    href={`/${page.toLowerCase()}`}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                    {page}
-                </Button>
-            )
-        )
-        ):(<div></div>)
-    }
 
     const showLogout = () => {
         return user?(

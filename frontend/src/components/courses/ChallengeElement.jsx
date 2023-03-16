@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import "./ChallengeElement.css";
 import CoursesOverview from "./CourseOverview";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid2 from "@mui/material/Unstable_Grid2";
@@ -21,8 +21,12 @@ import {Link} from "react-router-dom";
 import {CheckBox} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import AuthContext from "../../context/AuthContext";
 
 function DetailedChallenge(props) {
+    const { user, logoutUser } = useContext(AuthContext);
+    console.log(user)
+
     const { onClose, open,title, description, data} = props;
     const handleClose = () => {
         onClose();
@@ -40,6 +44,21 @@ function DetailedChallenge(props) {
     // a local state to store the currently selected file.
     const [selectedFile, setSelectedFile] = React.useState(null);
 
+    const renderButton = () => {
+        return user?(
+
+            <>
+                <Grid xs={6} sx={{display:"flex",justifyContent:"center"}}>
+                    <Button variant="contained" sx={{width:"90%"}} onClick={handleSubmit}>
+                        Submit Model
+                    </Button>
+                </Grid>
+            </>) : (
+            <>
+            </>
+
+        )
+    }
 
     const baseURL = "http://127.0.0.1:8000/api/"
     const handleSubmit = async(event) => {
@@ -66,7 +85,7 @@ function DetailedChallenge(props) {
         let body = {
                 ml_model_id: first_respone.data.id,
                 challenge_id: props.data.id,
-                username: "dummy"
+                username: user.username
             }
         console.log("second request with:")
         console.log(body)
@@ -148,12 +167,7 @@ function DetailedChallenge(props) {
                                 <input type="file" onChange={handleFileSelect}/>
                             </form>
                         </Grid>
-                        <Grid xs={6} sx={{display:"flex",justifyContent:"center"}}>
-                            <Button variant="contained" sx={{width:"90%"}} onClick={handleSubmit}>
-                                Submit Model
-                            </Button>
-
-                        </Grid>
+                        {renderButton()}
                     </Grid>
 
 
