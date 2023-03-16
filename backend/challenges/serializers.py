@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Challenge
+from .models import Challenge, TrainData
 from .models import Roles
 from .models import Courses
 from .models import Metric
@@ -39,6 +39,15 @@ class MetricSerializer(serializers.ModelSerializer):
         )
         model = Metric
 
+class TrainDataSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = (
+            'id',
+            'train_dataset_url',
+            'test_dataset_url',
+        )
+        model = TrainData
 
 class QuestionSerializer(WritableNestedModelSerializer):
     metric_choices = MetricSerializer(many=True)
