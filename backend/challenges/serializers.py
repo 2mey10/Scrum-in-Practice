@@ -4,6 +4,11 @@ from .models import Roles
 from .models import Courses
 from .models import Metric
 from drf_writable_nested.serializers import WritableNestedModelSerializer
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from django.http import HttpResponse
+import os
+import zipfile
 
 class RolesSerializer(serializers.ModelSerializer):
 
@@ -40,6 +45,17 @@ class QuestionSerializer(WritableNestedModelSerializer):
     role_choices = RolesSerializer(many=True)
     course_choices = CoursesSerializer(many=True)
 
+    def download_train_data(self, obj):
+        if obj.train_dataset_url:
+            file_path = default_storage.path(obj.train_dataset_url.name)
+            with zipfile.ZipFile(file_path, mode='r') as zip_file:
+                zip_buffer = zip_file.read()
+            zip_file.close()
+            response = HttpResponse(zip_buffer, content_type='application/zip')
+            response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_path)}"'
+            return response
+        else:
+            return None
     class Meta:
         fields = (
             'id',
