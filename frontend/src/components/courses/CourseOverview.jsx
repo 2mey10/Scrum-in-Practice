@@ -23,6 +23,7 @@ function CoursesOverview(props) {
     // fetch challenges data
     useEffect(() => {
         const getData = async () => {
+
             try {
                 const response = await axios.get(
                     baseURL + `challenge/`
@@ -40,7 +41,9 @@ function CoursesOverview(props) {
 
     // fetch courses data
     useEffect(() => {
+
         const getData = async () => {
+            console.log("running useeffect");
             try {
                 const response = await axios.get(
                     baseURL + `courses/`

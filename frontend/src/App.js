@@ -20,6 +20,7 @@ import Ranking from './components/Ranking';
 import AuthContext, {AuthProvider} from "./context/AuthContext";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
+import ChallengePage from "./components/courses/ChallengePage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
                         <Route element={<Register />} path="/register" />
                         <Route element={<ToBeImplemented/>} path="/register" />
                         <Route element={<CreateChallenge/>} path="/CreateChallenge" />
+                        <Route element={<ChallengePage/>} path="/challenges/:challengeID" />
                         <Route element={<Ranking/>} path="/ranking" />
                         <Route element={<Home />} path="/" />
                     </Routes>

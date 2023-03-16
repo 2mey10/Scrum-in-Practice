@@ -1,45 +1,104 @@
-import {
-    ButtonBase,
-    Card,
-    CardActionArea,
-    CardContent,
-    CardMedia,
-    Checkbox,
-    Dialog,
-    DialogTitle, FormControlLabel, FormGroup, Grid, List, ListItem, ListItemText,
-    TextField
-} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import * as React from "react";
-import "./ChallengeElement.css";
-import CoursesOverview from "./CourseOverview";
+import * as React from 'react';
+import Typography from '@mui/material/Typography';
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Grid2 from "@mui/material/Unstable_Grid2";
-import {Link, useNavigate} from "react-router-dom";
-import {CheckBox} from "@mui/icons-material";
-import Button from "@mui/material/Button";
-import axios from "axios";
-import AuthContext from "../../context/AuthContext";
 
-function DetailedChallenge(props) {
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import AuthContext from "../../context/AuthContext";
+import {Dialog, Grid, List, ListItem, ListItemText, TextField} from "@mui/material";
+import axios from "axios";
+import Ranking from "../Ranking";
+
+function DetailedChallenge() {
     const { user, logoutUser } = useContext(AuthContext);
     console.log(user)
 
-    const { onClose, open,title, description, data} = props;
-    const handleClose = () => {
-        onClose();
-    };
+
+    // fetch challenges data
+    const [challenges, setChallenges] = useState([]);
+
+    useEffect(() => {
+        const getData = async () => {
+
+            try {
+                const response = await axios.get(
+                    baseURL + `challenge/`
+                );
+                console.log("fetched challenges data");
+                setChallenges(response.data);
+            } catch (err) {
+                console.log(err.message);
+                console.log("error in fetching challenges data")
+                setChallenges(null);
+            }
+        };
+        getData();
+    }, []);
+
+
+
+    const {challengeID} = useParams()
+    let data = {}
+    console.log("list of challenges")
+    console.log(challenges)
+    challenges.forEach((challenge)=>{
+        if (challenge.id === Number(challengeID)){
+            data = challenge
+        }
+        })
+
+    console.log("DATAAAAA")
+    console.log(data)
+
+    let props = {
+        title:"titlE",
+        description:"desdasdas",
+        data:{
+            "id": 1,
+            "description_text": "testasdasdas",
+            "title_text": "test",
+            "train_dataset_url": "http://127.0.0.1:8000/media/traindata/test_56XfYMh.zip",
+            "test_dataset_url": "http://127.0.0.1:8000/media/testdata/test_o7dHhO6.zip",
+            "metric_choices": [
+                {
+                    "id": 1,
+                    "metric_name": "Accuracy",
+                    "metric_formular": "acc"
+                }
+            ],
+            "role_choices": [
+                {
+                    "id": 1,
+                    "role_name": "Classification"
+                }
+            ],
+            "course_choices": [
+                {
+                    "id": 1,
+                    "course_name": "Informatik",
+                    "course_description": ":)"
+                }
+            ],
+            "starting_time": "2023-03-06T18:23:00Z",
+            "end_time": "2023-03-16T18:23:00Z",
+            "cover_image": null,
+            "is_human": false,
+            "min_classification": 10,
+            "max_classification": 100
+        }
+    }
 
     console.log("props challenge element")
     console.log(props)
     // styling
     const textfieldLength = "400px";
+
     const metrics = [];
     props.data.metric_choices.forEach((metric)=>{
         metrics.push(metric.metric_name)
     })
+    props.data = data;
 
     // a local state to store the currently selected file.
     const [selectedFile, setSelectedFile] = React.useState(null);
@@ -88,10 +147,10 @@ function DetailedChallenge(props) {
 
         console.log(first_respone.data)
         let body = {
-                ml_model_id: first_respone.data.id,
-                challenge_id: props.data.id,
-                username: user.username
-            }
+            ml_model_id: first_respone.data.id,
+            challenge_id: data.id,
+            username: user.username
+        }
         console.log("second request with:")
         console.log(body)
         try {
@@ -115,12 +174,17 @@ function DetailedChallenge(props) {
     }
 
     return (
-        <Dialog onClose={handleClose} open={open} fullWidth={true} maxWidth={"lg"}>
+        <div>
+            <div>
+                {challenges.map((ch)=>{
+                    console.log("xd")
+                })}
+            </div>
             <Typography variant={"h1"} justifyContent="center" display="flex">
-                {props.title}
+                {data.description_text}
             </Typography>
             <Typography variant={"h4"} color="#808080" justifyContent="center" display="flex">
-                {props.description}
+                {data.title_text}
             </Typography>
             <div className="outer-container">
                 <div className="container">
@@ -134,7 +198,7 @@ function DetailedChallenge(props) {
                                     id="outlined-read-only-input"
                                     label="Training Dataset"
                                     sx={{maxWidth:textfieldLength,minWidth:textfieldLength}}
-                                    defaultValue={props.data.train_dataset_url}
+                                    defaultValue={data.train_dataset_url}
                                     InputProps={{
                                         readOnly: true,
                                     }}
@@ -145,7 +209,7 @@ function DetailedChallenge(props) {
                                     id="outlined-read-only-input"
                                     label="Test Dataset"
                                     sx={{maxWidth:"400px",minWidth:"400px"}}
-                                    defaultValue={props.data.test_dataset_url}
+                                    defaultValue={data.test_dataset_url}
                                     InputProps={{
                                         readOnly: true,
                                     }}
@@ -175,66 +239,30 @@ function DetailedChallenge(props) {
                         {renderButton()}
                     </Grid>
 
-
-
-
                 </div>
-
-
             </div>
-        </Dialog>
+            <div>
+                <Ranking/>
+            </div>
+        </div>
     );
 }
 
 
-
-function ChallengeElement(props) {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    console.log("challenge element data")
-    console.log(props.data)
-    const navigate = useNavigate();
+function ChallengePage() {
+    const { user, logoutUser } = useContext(AuthContext);
+    console.log(user)
 
     return (
-        <div className="course-element">
-            <ButtonBase onClick={handleClickOpen}>
-                <Card sx={{height:300, width:300}}>
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="140"
-                            image="/static/images/unibib.png"
-                            alt="no image"
-                            onClick={() => navigate(`/challenges/${props.data.id}`)}
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                {props.title}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {props.description_text}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-            </ButtonBase>
-            <DetailedChallenge
-                open={open}
-                onClose={handleClose}
-                title={props.title}
-                description={props.description_text}
-                data ={props.data}
-            />
-        </div>
+        <div>
 
+           <Typography variant="h1">
+               challenge page
+           </Typography>
+
+            <DetailedChallenge/>
+
+        </div>
     );
 }
-
-export default ChallengeElement;
+export default ChallengePage;
