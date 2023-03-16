@@ -6,7 +6,7 @@ from django.db import models
 
 
 class Metric(models.Model):
-    metric_name = models.CharField(max_length=100,default="",blank=False,null=False)
+    metric_name = models.CharField(max_length=100,default="false request!",blank=True, null=True)
     metric_formular = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
@@ -14,14 +14,14 @@ class Metric(models.Model):
 
 
 class Roles(models.Model):
-    role_name = models.CharField(max_length=200,default="",blank=False,null=False)
+    role_name = models.CharField(max_length=200,default="false request!",blank=True, null=True)
 
     def __str__(self):
         return self.role_name
 
 
 class Courses(models.Model):
-    course_name = models.CharField(max_length=300,default="",blank=False,null=False)
+    course_name = models.CharField(max_length=300,default="false request!",blank=True, null=True)
     course_description = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
