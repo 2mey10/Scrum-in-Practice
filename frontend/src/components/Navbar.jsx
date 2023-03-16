@@ -11,8 +11,9 @@ import {useContext} from "react";
 import AuthContext from "../context/AuthContext";
 import Box from "@mui/material/Box";
 
-const pages_logged_in = ['Courses','CreateChallenge','Ranking'];
-const pages_logged_out = ['Courses', 'Login','Register','CreateChallenge','Ranking'];
+const user_pages_logged_in = ['Courses','Ranking'];
+const tutor_pages_logged_in = ['Courses','CreateChallenge','Ranking'];
+const pages_logged_out = ['Courses', 'Login','Register','Ranking'];
 const applicationName = "Machine Learning Meisterschaft Magdeburg"
 function ResponsiveAppBar() {
     // const user = false;
@@ -30,7 +31,35 @@ function ResponsiveAppBar() {
             textDecoration: 'none',
     }
 
-    const fetchLoginStatus = () => {
+
+    const getAccesPages = (user) => {
+        console.log("getting access...")
+        console.log(user)
+        if (user.tutortoken==="tutor"){
+            return tutor_pages_logged_in;
+        }
+        else {
+            return user_pages_logged_in
+        }
+
+    }
+    const showTutorPages = () => {
+        return (user.tutortoken==="tutor")?(
+            user_pages_logged_in.map((page) =>(
+                <Button
+                    key={page}
+                    component="a"
+                    href={`/${page.toLowerCase()}`}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                    {page}
+                </Button>
+            )
+        )
+        ):(<div></div>)
+    }
+
+    const showLogout = () => {
         return user?(
 
             <>
@@ -84,7 +113,7 @@ function ResponsiveAppBar() {
 
                     {/*show pages*/}
                     {/*<Router>*/}
-                        {user ? pages_logged_in.map((page) => (
+                        {user ? getAccesPages(user).map((page) =>(
                             <Button
                                 key={page}
                                 component="a"
@@ -118,7 +147,7 @@ function ResponsiveAppBar() {
                     >
                         TEST
                     </Typography>
-                    {fetchLoginStatus()}
+                    {showLogout()}
                 </Toolbar>
             </Container>
         </AppBar>
