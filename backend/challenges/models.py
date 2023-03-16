@@ -27,6 +27,11 @@ class Courses(models.Model):
     def __str__(self):
         return self.course_name
 
+class TrainData(models.Model):
+    train_dataset_url = models.FileField(upload_to='traindata/', blank=False, null=True,
+                                         validators=[FileExtensionValidator(allowed_extensions=["zip"])])
+    test_dataset_url = models.FileField(upload_to='testdata/', blank=False, null=True,
+                                        validators=[FileExtensionValidator(allowed_extensions=["zip"])])
 
 class Challenge(models.Model):
     # class Metric(models.TextChoices):
@@ -38,10 +43,8 @@ class Challenge(models.Model):
     title_text = models.CharField(max_length=50)
     #train_dataset_url = models.URLField(blank=True, null=True)
     #test_dataset_url = models.URLField(blank=True, null=True)
-    train_dataset_url = models.FileField(upload_to='traindata/', blank=False, null=True,
-                                         validators=[FileExtensionValidator(allowed_extensions=["zip"])])
-    test_dataset_url = models.FileField(upload_to='testdata/', blank=False, null=True,
-                                        validators=[FileExtensionValidator(allowed_extensions=["zip"])])
+    train_dataset_url = models.IntegerField(blank=True, null=True)
+    test_dataset_url = models.IntegerField(blank=True, null=True)
     metric_choices = models.ManyToManyField(Metric)
     role_choices = models.ManyToManyField(Roles)
     course_choices = models.ManyToManyField(Courses)

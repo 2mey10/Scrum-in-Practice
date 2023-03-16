@@ -30,6 +30,10 @@ class CoursesViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CoursesSerializer
 
 
+class TrainDatasViewSet(viewsets.ModelViewSet):
+    queryset = models.TrainData.objects.all()
+    serializer_class = serializers.TrainDataSerializer
+
 class MetricViewSet(viewsets.ModelViewSet):
     queryset = models.Metric.objects.all()
     serializer_class = serializers.MetricSerializer
