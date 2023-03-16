@@ -41,18 +41,17 @@ def makeEntry(request):
     model_id = request.data.get("ml_model_id")
     model_id = int(model_id) -1
 
+    ch_id = request.data.get("challenge_id")
+    ch_id = int(ch_id) - 1
+
     queryset = models.MlModel.objects.values_list('ml_model')
 
-    #serializer_class = serializers.MlModelSerializer(queryset)
-    print(model_id)
-    score = start_evaluation(str(settings.MEDIA_ROOT) +  "/" +  queryset[model_id][0], "Klassifizierung", "")
-
-    #queryset = models.MlModel.objects.all()[1]
-    #serializer_class = serializers.MlModelSerializer(queryset)
-
-    #seril = serializers.RankingModelSerializer(data=request.data)
-
-    print(request.data)
+    queryset_ch = models.Challenge.objects.values_list("test_dataset_url")
+    print(queryset_ch)
+    path_mod = str(settings.MEDIA_ROOT) +  "/" +  queryset[model_id][0]
+    path_zip = str(settings.MEDIA_ROOT) +  "/" +  queryset_ch[ch_id][0]
+    score = start_evaluation(path_mod, "Klassifizierung", path_zip)
+    print(path_mod, path_zip)
 
     rank_query = models.RankingEntry(model_ref = models.MlModel.objects.all()[model_id],
     username = request.data.get("username"),
