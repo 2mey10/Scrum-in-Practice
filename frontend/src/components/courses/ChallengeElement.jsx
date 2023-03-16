@@ -73,7 +73,7 @@ function DetailedChallenge(props) {
         try {
             const response = await axios({
                 method: "post",
-                url: baseURL+"obviouslynotworking/",
+                url: baseURL+"makeEntry",
                 //data: formData,
                 headers: { "Content-Type": "multipart/form-data" },
                 data: body

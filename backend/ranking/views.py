@@ -39,11 +39,12 @@ def makeEntry(request):
     List all code snippets, or create a new snippet.
     """
     model_id = request.data.get("ml_model_id")
+    model_id = int(model_id) -1
 
     queryset = models.MlModel.objects.values_list('ml_model')
 
     #serializer_class = serializers.MlModelSerializer(queryset)
-
+    print(model_id)
     score = start_evaluation(str(settings.MEDIA_ROOT) +  "/" +  queryset[model_id][0], "Klassifizierung", "")
 
     #queryset = models.MlModel.objects.all()[1]
