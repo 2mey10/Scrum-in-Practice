@@ -62,7 +62,7 @@ def makeEntry(request):
     Precision = score.get("precision"),
     Recall = score.get("recall"),
     F1 = score.get("F1"),
-    is_human = True)
+    is_human = False)
     rank_query.save()
 
     serializer_class = serializers.RankingEntrySerializer(rank_query)
