@@ -105,13 +105,36 @@ const CreateChallenge = () => {
         setSelectedFileTest(event.target.files[0])
     }
 
-    const handleSubmit = async(event) => {
+    const handleSubmitAllData = async(event) => {
         event.preventDefault()
+
+        let first_response = {};
+        try {
+            //upload the datasets
+            const datasets = {
+                train: selectedFileTrain,
+                test: selectedFileTest
+            }
+            const response = await axios({
+                method: "post",
+                url:"http://127.0.0.1:8000/api/challengeDataUpload/",
+                headers: { "Content-Type": "multipart/form-data" },
+                data: datasets
+            });
+            first_response = response;
+            console.log(response)
+        } catch(error) {
+            console.log("dataset upload failed")
+            console.log(error)
+        }
+
+
+        console.log(first_response);
 
         const body = {description_text: description,
             title_text: title,
-            train_dataset_url: selectedFileTrain,
-            test_dataset_url: selectedFileTest,
+            train_dataset_url: first_response.train_dataset_url,
+            test_dataset_url: first_response.test_dataset_url,
             metric_choices: selectedmetrics,
             role_choices: selectedrole,
             course_choices: selectcourse,
@@ -129,7 +152,7 @@ const CreateChallenge = () => {
             const response = await axios({
                 method: "post",
                 url:"http://127.0.0.1:8000/api/challenge/",
-                headers: { "Content-Type": "multipart/form-data" },
+                headers: { "Content-Type": "application/json" },
                 data: body
             });
             console.log(response)
@@ -142,7 +165,7 @@ const CreateChallenge = () => {
 
     return (
         <Container maxWidth="sm">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmitAllData} enctype="multipart/form-data">
                 <Typography variant="h4" align="center" gutterBottom>
                     Create Challenge
                 </Typography>
