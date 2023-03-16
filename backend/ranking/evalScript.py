@@ -109,8 +109,8 @@ def evaluate_model(model_path, test_data_loader, task):
         }
         
         #accuracy
-        acc = (y_pred.round() == y_true).astype(float).mean()
-        performance_scores["accuracy"] = acc
+        acc_value = (y_pred.round() == y_true).astype(float).mean()
+        performance_scores["accuracy"] = round(acc_value, 4)
         
         # F1 score
         f1_score_value = f1_score(y_true=target.detach().numpy(), y_pred=preds.detach().numpy(), average='weighted')
@@ -143,7 +143,7 @@ def evaluate_model(model_path, test_data_loader, task):
         }
         
         iou_score = tf.keras.metrics.MeanIoU(num_classes=n_classes)
-        performance_scores["IoU"] = iou_score
+        performance_scores["IoU"] = round(iou_score, 4)
         # single class IoU calculation
         #intersection = numpy.logical_and(result1, result2)
         #union = numpy.logical_or(result1, result2)
@@ -154,7 +154,7 @@ def evaluate_model(model_path, test_data_loader, task):
         from torchmetrics import Dice
         dice = Dice(average='micro')
         dice_score = dice(preds, target)
-        performance_scores["dice"] = dice_score
+        performance_scores["dice"] = round(dice_score, 4)
         
     return performance_scores
 
