@@ -112,29 +112,32 @@ const CreateChallenge = () => {
         try {
             //upload the datasets
             const datasets = {
-                train: selectedFileTrain,
-                test: selectedFileTest
+                train_dataset_url: selectedFileTrain,
+                test_dataset_url: selectedFileTest
             }
+            console.log("datasets")
+            console.log(datasets)
             const response = await axios({
                 method: "post",
-                url:"http://127.0.0.1:8000/api/challengeDataUpload/",
+                url:"http://127.0.0.1:8000/api/traindata/",
                 headers: { "Content-Type": "multipart/form-data" },
                 data: datasets
             });
-            first_response = response;
+            console.log("first response)")
             console.log(response)
+            first_response = response;
+
         } catch(error) {
             console.log("dataset upload failed")
             console.log(error)
         }
 
 
-        console.log(first_response);
-
-        const body = {description_text: description,
+        const body = {
+            description_text: description,
             title_text: title,
-            train_dataset_url: first_response.train_dataset_url,
-            test_dataset_url: first_response.test_dataset_url,
+            train_dataset_url: first_response.data.train_dataset_url,
+            test_dataset_url: first_response.data.test_dataset_url,
             metric_choices: selectedmetrics,
             role_choices: selectedrole,
             course_choices: selectcourse,
@@ -147,8 +150,8 @@ const CreateChallenge = () => {
         }
 
         try {
+            console.log("body")
             console.log(body)
-            console.log(body.metric_choices)
             const response = await axios({
                 method: "post",
                 url:"http://127.0.0.1:8000/api/challenge/",
@@ -165,7 +168,7 @@ const CreateChallenge = () => {
 
     return (
         <Container maxWidth="sm">
-            <form onSubmit={handleSubmitAllData} enctype="multipart/form-data">
+            <form onSubmit={handleSubmitAllData}>
                 <Typography variant="h4" align="center" gutterBottom>
                     Create Challenge
                 </Typography>
