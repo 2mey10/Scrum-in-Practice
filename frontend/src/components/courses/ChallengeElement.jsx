@@ -49,12 +49,17 @@ function DetailedChallenge(props) {
 
             <>
                 <Grid xs={6} sx={{display:"flex",justifyContent:"center"}}>
-                    <Button variant="contained" sx={{width:"90%"}} onClick={handleSubmit}>
+                    <Button variant="contained" sx={{width:"90%"}} onClick={handleSubmit} disabled={false}>
                         Submit Model
                     </Button>
                 </Grid>
             </>) : (
             <>
+                <Grid xs={6} sx={{display:"flex",justifyContent:"center"}}>
+                    <Button variant="contained" sx={{width:"90%"}} onClick={handleSubmit} disabled={true}>
+                        Log in to compete!
+                    </Button>
+                </Grid>
             </>
 
         )

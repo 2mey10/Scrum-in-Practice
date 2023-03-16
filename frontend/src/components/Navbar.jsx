@@ -51,20 +51,20 @@ function ResponsiveAppBar() {
                 <Button
                     key={"Logout"}
                     onClick={logoutUser}
-                    sx={{ my: 2, color: '#063970', display: 'block' }}
+                    sx={{ my: 2, color: '#ffffff', display: 'block' }}
                 >
                     {"Logout"}
                 </Button>
-                <Box>
+                <Box sx={{color:"#000000", my:2}}>
                     <Typography>
-                        Logged in
+                        LOGGED IN: {user.username.toUpperCase()}
                     </Typography>
                 </Box>
             </>) : (
             <>
                 <Box >
                     <Typography>
-                        Logged out
+
                     </Typography>
                 </Box>
 
@@ -123,15 +123,6 @@ function ResponsiveAppBar() {
 
 
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={navbar_style}
-                    >
-                        TEST
-                    </Typography>
                     {showLogout()}
                 </Toolbar>
             </Container>

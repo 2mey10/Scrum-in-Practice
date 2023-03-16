@@ -13,13 +13,13 @@ function Home() {
         return user?(
             <>
                 <Typography variant={"h3"}>
-                    Willkommen {user.username} zur Magdeburger Machine Learning Meisterschaft!
+                    Welcome {user.username} to the Magdeburger Machine Learning Meisterschaft!
                 </Typography>
             </>) : (
             <>
                 <Typography variant={"h3"}>
-                    Willkommen zur Magdeburger Machine Learning Meisterschaft!
-                    Logge dich ein um fortzufahren.
+                    Welcome to the Magdeburger Machine Learning Meisterschaft!
+                    Log in to compete or go to courses to view the challenges.
                 </Typography>
             </>
         )

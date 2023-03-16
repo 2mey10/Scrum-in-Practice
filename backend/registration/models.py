@@ -49,7 +49,7 @@ class Usermodel(AbstractUser):
     firstname = models.CharField(max_length=255, null=True)
     lastname = models.CharField(max_length=255, null=True)
     matriculationnumber = models.IntegerField(null=True)
-    studentstatus = models.CharField(max_length=20)
+    studentstatus = models.CharField(max_length=20,default="INTERN")
     Courseofstudies = models.CharField(max_length=50, null=True)
     exsam = models.CharField(max_length=50, null=True)
     creditingofthemodule = models.CharField(max_length=50, null=True)

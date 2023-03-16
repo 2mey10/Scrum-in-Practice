@@ -97,7 +97,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     Courseofstudies = serializers.CharField(max_length=50)
     exsam = serializers.CharField(max_length=50)
     studentstatus = serializers.ChoiceField(
-        choices=['Intern', 'Extern'])
+        choices=['Intern', 'Extern'],allow_null=True,allow_blank=True)
     creditingofthemodule = serializers.CharField(max_length=50)
     tutortoken = serializers.CharField(max_length=50,allow_null=True,allow_blank=True)
     # DSVG = serializers.BooleanField(default=True)
