@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 
+import challenges
 from . import models
 from . import serializers
 from .models import MlModel
@@ -42,14 +43,18 @@ def makeEntry(request):
     model_id = int(model_id) -1
 
     ch_id = request.data.get("challenge_id")
-    ch_id = int(ch_id) - 1
+    ch_id = int(ch_id) #- 1
 
     queryset = models.MlModel.objects.values_list('ml_model')
 
     queryset_ch = models.Challenge.objects.values_list("test_dataset_url")
-    print(queryset_ch)
+    data_id = queryset_ch[ch_id][0] -1
+
+    queryset_data = challenges.models.TrainData.objects.values_list("test_dataset_url")
+
+
     path_mod = str(settings.MEDIA_ROOT) +  "/" +  queryset[model_id][0]
-    path_zip = str(settings.MEDIA_ROOT) +  "/" +  queryset_ch[ch_id][0]
+    path_zip = str(settings.MEDIA_ROOT) +  "/" +  queryset_data[data_id][0]
     score = start_evaluation(path_mod, "Klassifizierung", path_zip)
     print(path_mod, path_zip)
 
