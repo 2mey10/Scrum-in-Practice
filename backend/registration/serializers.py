@@ -99,7 +99,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     studentstatus = serializers.ChoiceField(
         choices=['Intern', 'Extern'])
     creditingofthemodule = serializers.CharField(max_length=50)
-    tutortoken = serializers.CharField(max_length=50)
+    tutortoken = serializers.CharField(max_length=50,allow_null=True,allow_blank=True)
     # DSVG = serializers.BooleanField(default=True)
 
     class Meta:
