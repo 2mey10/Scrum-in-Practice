@@ -213,6 +213,7 @@ const CreateChallenge = () => {
                             value={startingTime}
                             onChange={handleStartingTimeChange}
                             InputLabelProps={{ shrink: true }}
+                            required={true}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -224,6 +225,7 @@ const CreateChallenge = () => {
                             value={endTime}
                             onChange={handleEndTimeChange}
                             InputLabelProps={{ shrink: true }}
+                            required={true}
                         />
                     </Grid>
                     <Grid container spacing={2}>

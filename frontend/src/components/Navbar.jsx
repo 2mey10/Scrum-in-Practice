@@ -11,9 +11,9 @@ import {useContext} from "react";
 import AuthContext from "../context/AuthContext";
 import Box from "@mui/material/Box";
 
-const user_pages_logged_in = ['Courses','Ranking'];
+const user_pages_logged_in = ['Courses'];
 const tutor_pages_logged_in = ['Courses','CreateChallenge','Ranking'];
-const pages_logged_out = ['Courses', 'Login','Register','Ranking'];
+const pages_logged_out = ['Courses', 'Login','Register'];
 const applicationName = "Machine Learning Meisterschaft Magdeburg"
 function ResponsiveAppBar() {
     // const user = false;
