@@ -100,10 +100,10 @@ function DetailedChallenge(props) {
     return (
         <div key={props.challengeID}>
             <Typography variant={"h1"} justifyContent="center" display="flex">
-                {data.description_text}
+                {data.title_text}
             </Typography>
             <Typography variant={"h4"} color="#808080" justifyContent="center" display="flex">
-                {data.title_text}
+                {data.description_text}
             </Typography>
             <div className="outer-container">
                 <div className="container">
@@ -181,11 +181,10 @@ function ChallengePage() {
 
             try {
                 const response = await axios.get(
-                    baseURL + `challenge/`
+                    baseURL + `challenge/`+ challengeID
                 );
                 console.log("fetched challenges data",response.data);
                 setChallenges(response.data);
-                console.log("setting fetched challenges",challenges)
             } catch (err) {
                 console.log(err.message);
                 console.log("error in fetching challenges data")
@@ -202,17 +201,17 @@ function ChallengePage() {
     console.log("dataaa")
     console.log(data)
     console.log(challenges)
-    useEffect(()=>{
-        const getChallenge = () => {
-            console.log("selecting challenge...")
-            let selectChallenge = challenges.filter(function(el){
-                return el.id===Number(challengeID)
-            })
-            console.log("selectchallenge:",selectChallenge)
-            setData(selectChallenge)
-        }
-        getChallenge();
-    },challenges)
+    // useEffect(()=>{
+    //     const getChallenge = () => {
+    //         console.log("selecting challenge...")
+    //         let selectChallenge = challenges.filter(function(el){
+    //             return el.id===Number(challengeID)
+    //         })
+    //         console.log("selectchallenge:",selectChallenge)
+    //         setData(selectChallenge)
+    //     }
+    //     getChallenge();
+    // },challenges)
     // let selectChallenge = challenges.filter(function(el){
     //     return el.id===Number(challengeID)
     // })
@@ -221,12 +220,9 @@ function ChallengePage() {
 
     return (
         <div>
-           <Typography variant="h1">
-               challenge page
-           </Typography>
             <DetailedChallenge
             user = {user}
-            data = {data}
+            data = {challenges}
             challengeID = {challengeID}
             />
 
