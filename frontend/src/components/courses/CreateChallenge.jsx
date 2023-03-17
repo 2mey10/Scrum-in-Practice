@@ -136,8 +136,8 @@ const CreateChallenge = () => {
         const body = {
             description_text: description,
             title_text: title,
-            train_dataset_url: first_response.data.train_dataset_url,
-            test_dataset_url: first_response.data.test_dataset_url,
+            train_dataset_url: first_response.data.id,
+            test_dataset_url: first_response.data.id,
             metric_choices: selectedmetrics,
             role_choices: selectedrole,
             course_choices: selectcourse,
