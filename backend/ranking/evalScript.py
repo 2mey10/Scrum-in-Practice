@@ -157,11 +157,19 @@ def start_evaluation(model_path, task, test_data_zip_path):
     # delete if other evaluation tasks are implemented
     task = "Klassifizierung"
 
+    print("Original: " + test_data_zip_path)
+
     # TODO: check if zip already unpacked to directory
     test_data_foldername = test_data_zip_path.split("/")[-1].split(".")[0]  # folder name without ".zip" ending
+
+    print(test_data_foldername)
+
     unzip_path = "/".join(test_data_zip_path.split("/")[0:-1])
+
+    print(unzip_path + test_data_foldername)
+
     with zipfile.ZipFile(test_data_zip_path, 'r') as zip:
-        zip.extractall(unzip_path)
+        zip.extractall(unzip_path + '/' + test_data_foldername)
     test_data_path = "/".join([unzip_path, test_data_foldername])  # unzip_path
 
     if task == "Klassifizierung":
