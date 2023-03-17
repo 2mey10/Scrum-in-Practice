@@ -5,7 +5,7 @@ import AndroidIcon from '@mui/icons-material/Android';
 
 
 
-function Ranking() {
+function Ranking(props) {
 
     const [ranks, setRanks] = useState([
         // {
@@ -140,9 +140,15 @@ function Ranking() {
         setSelectedChallengeId(selectedChallengeId === Cid ? null : Cid);
     };
 
-    const filteredRanks = selectedChallengeId
-        ? sortedRanks.filter((row) => row.Challengid === selectedChallengeId)
-        : sortedRanks;
+    console.log("props")
+    console.log(props)
+    console.log(ranks)
+
+    let filteredRanks = ranks.filter(function(rank){
+        return rank.Challengid === Number(props.challengeID);
+    });
+    console.log(filteredRanks)
+
 
     const handleSort = (column) => {
         if (column === sortColumn) {
