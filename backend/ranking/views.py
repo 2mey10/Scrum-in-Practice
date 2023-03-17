@@ -54,7 +54,7 @@ def makeEntry(request):
 
 
     path_mod = str(settings.MEDIA_ROOT) +  "/" +  queryset[model_id][0]
-    path_zip = data_id#str(settings.MEDIA_ROOT) +  "/" +  queryset_data[data_id][0]
+    path_zip = str(settings.MEDIA_ROOT) +  "/" +  queryset_data[data_id][0]
     score = start_evaluation(path_mod, "Klassifizierung", path_zip)
     print(path_mod, path_zip)
 
