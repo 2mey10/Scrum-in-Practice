@@ -140,14 +140,9 @@ function Ranking(props) {
         setSelectedChallengeId(selectedChallengeId === Cid ? null : Cid);
     };
 
-    console.log("props")
-    console.log(props)
-    console.log(ranks)
-
     let filteredRanks = ranks.filter(function(rank){
         return rank.Challengid === Number(props.challengeID);
     });
-    console.log(filteredRanks)
 
 
     const handleSort = (column) => {

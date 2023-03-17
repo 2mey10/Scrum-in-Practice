@@ -21,7 +21,6 @@ function DetailedChallenge(props) {
 
     // a local state to store the currently selected file.
     const [selectedFile, setSelectedFile] = React.useState(null);
-    console.log("props detailed",props)
     console.log("detailed data",data)
 
     const renderButton = () => {
@@ -98,6 +97,23 @@ function DetailedChallenge(props) {
 
     // styling
     const textfieldLength = "400px";
+
+    const downloadFile = async () => {
+        // console.log("downloading file")
+        // const response = await axios.get(
+        //     baseURL + `download/`+ challengeID
+        // );
+        // const blob = response.blob;
+        // console.log("blob",blob)
+
+        fetch('http://example.com/download/test_mb2HWI0.zip%27','get') //must be fixed to be the api later
+            .then(response => response.blob())
+            .then(blob => {
+                saveAs(blob, 'test_mb2HWI0.zip');
+            });
+    }
+
+
     return (
         <div key={props.challengeID}>
             <Typography variant={"h1"} justifyContent="center" display="flex">
@@ -110,31 +126,38 @@ function DetailedChallenge(props) {
                 <div className="container">
                     <Grid container rowSpacing={1} paddingY="30px">
                         <Grid xs={6}>
-                            <Typography variant="h5" sx={{display:"flex", justifyContent:"center"}}>
-                                Datasets
-                            </Typography>
-                            <div className="container-element">
-                                <TextField
-                                    id="outlined-read-only-input"
-                                    label="Training Dataset"
-                                    sx={{maxWidth:textfieldLength,minWidth:textfieldLength}}
-                                    defaultValue={data.train_dataset_url}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
-                            </div>
-                            <div className="container-element">
-                                <TextField
-                                    id="outlined-read-only-input"
-                                    label="Test Dataset"
-                                    sx={{maxWidth:"400px",minWidth:"400px"}}
-                                    defaultValue={data.test_dataset_url}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
-                            </div>
+
+                                <Typography variant="h5" sx={{display:"flex", justifyContent:"center"}}>
+                                    Datasets
+                                </Typography>
+                                <Button  variant="outlined" color="primary" sx={{marginTop:"40px"}} onClick={downloadFile}>
+                                    Download training set
+                                </Button>
+
+
+                            {/*<div className="container-element">*/}
+                            {/*    <TextField*/}
+                            {/*        id="outlined-read-only-input"*/}
+                            {/*        label="Training Dataset"*/}
+                            {/*        sx={{maxWidth:textfieldLength,minWidth:textfieldLength}}*/}
+                            {/*        defaultValue={data.description_text}*/}
+                            {/*        InputProps={{*/}
+                            {/*            readOnly: true,*/}
+                            {/*        }}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+                            {/*<div className="container-element">*/}
+                            {/*    <TextField*/}
+                            {/*        id="outlined-read-only-input"*/}
+                            {/*        label="Test Dataset"*/}
+                            {/*        sx={{maxWidth:"400px",minWidth:"400px"}}*/}
+                            {/*        defaultValue={data.test_dataset_url}*/}
+                            {/*        InputProps={{*/}
+                            {/*            readOnly: true,*/}
+                            {/*        }}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+
                         </Grid>
                         <Grid xs={6}>
                             <Typography variant="h5"sx={{display:"flex", justifyContent:"center"}}>
