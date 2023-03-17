@@ -79,6 +79,7 @@ Jeder dieser beiden Datensätze sollte das durch die Klasse torchvision.datasets
 d.h. ein Ordner für Trainings- und ein Ordner für Testdaten, in jedem dieser Ordner n Unterordner mit Bildern für die n Klassen (die Unterordner sollten nachvollziehbare Klassennamen haben). Daraus müssen 2 .zip-Dateien erstellt werden.
 
 Beispiele für Datensätze mit passendem Format:
+
 https://www.kaggle.com/datasets/tongpython/cat-and-dog
 https://www.kaggle.com/datasets/puneet6060/intel-image-classification 
 
@@ -86,6 +87,7 @@ https://www.kaggle.com/datasets/puneet6060/intel-image-classification
 ## Hinweise für das Training:
 Beim Training muss das Modell mit denselben Transforms geladen werden wie im Auswertungsskript, damit die Auswertung funktioniert, d.h. 
 > transforms.Compose([ transforms.ToTensor(), transforms.Grayscale(1), transforms.Resize((28,28)) ])
+
 Vor dem Speichern als ONNX-Modell muss der Student für sein Modell .eval() aufrufen.
 
 
