@@ -1,3 +1,4 @@
+import codecs
 import mimetypes
 
 from django.shortcuts import render, redirect
@@ -9,6 +10,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from rest_framework.decorators import api_view
 from rest_framework.generics import RetrieveAPIView
 
+import challenges
 from .models import Challenge
 import os
 import zipfile
@@ -78,22 +80,37 @@ class DownloadTrainDataView(viewsets.ModelViewSet):
         except Challenge.DoesNotExist:
             raise Http404
 
-def download_file(request):
+def download_file(request, ch):
     # Define Django project base directory
     # Define text file name
-    filename = '/testdata/test_set.zip'
+
+
+
+    queryset_ch = models.Challenge.objects.values_list("test_dataset_url")
+    data_id = int(queryset_ch[ch][0]) - 1
+
+    queryset_data = challenges.models.TrainData.objects.values_list("test_dataset_url")
+
+    filename =  '/' + queryset_data[data_id][0]
+    #filename = '/testdata/test_set.zip'
+
+
     # Define the full file path
     filepath = str(settings.MEDIA_ROOT) + filename
     # Open the file for reading content
-    path = open(filepath, 'r')
+    #path = open(filepath, 'r')
+
+    with codecs.open(filepath, 'r', encoding='utf-8', errors='ignore') as path:
+
     # Set the mime type
-    mime_type, _ = mimetypes.guess_type(filepath)
+   # mime_type, _ = mimetypes.guess_type(filepath)
     # Set the return value of the HttpResponse
-    response = HttpResponse(path, content_type=mime_type)
+
+        response = HttpResponse(path, content_type=' application/zip')
     # Set the HTTP header for sending to browser
-    response['Content-Disposition'] = "attachment; filename=%s" % filename
+        response['Content-Disposition'] = "attachment; filename=%s" % filename
     # Return the response value
-    return response
+        return response
 
 
 

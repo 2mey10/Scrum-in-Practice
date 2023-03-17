@@ -19,4 +19,4 @@ router.register('courses', CoursesViewSet, basename='courses')
 router.register('metric', MetricViewSet, basename='metric')
 router.register('challenges/<int:pk>/train-data/', DownloadTrainDataView, basename='downloadtrain')
 
-urlpatterns = router.urls + [path('download', download_file)] + [path('getSingleChallenge/<int:pk>', getSingleChallenge)]
+urlpatterns = router.urls + [path('download/<int:ch>', download_file)] + [path('getSingleChallenge/<int:pk>', getSingleChallenge)]
