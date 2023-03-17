@@ -1,5 +1,6 @@
 # Scrum-in-Practice
 Repository for the Scrum in Practice Workshop @OVGU 2023
+> link
 
 Entwicklung einer Webanwendung mit React.js und Django Restframework. Das Frontend wurde mit ReactJS entwickelt. Das Backend basiert vollständig auf Django mit Django Rest Framework. 
 
@@ -57,8 +58,15 @@ Server ausführen:
 Ändern des aktuellen Verzeichnises in den Frontend-Ordner
 
 Installation aller Frontend-Abhängigkeiten: 
+Frontend Ordner öffnen
+> npm install
 
-Server Ausführen: npm start
+Server Ausführen: 
+Frontend Ordner öffnen
+>npm start
+---
+>!!! Es muss eine Browser Extension installiert sein, die die CORS Überprüfung disabled.
+---
 
 Ausführen des Backend und des Frontend 
 
