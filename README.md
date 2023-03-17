@@ -1,6 +1,5 @@
 # Scrum-in-Practice
 Repository for the Scrum in Practice Workshop @OVGU 2023
-> link
 
 Entwicklung einer Webanwendung mit React.js und Django Restframework. Das Frontend wurde mit ReactJS entwickelt. Das Backend basiert vollständig auf Django mit Django Rest Framework. 
 
