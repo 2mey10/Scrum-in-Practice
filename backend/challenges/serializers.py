@@ -45,17 +45,22 @@ class QuestionSerializer(WritableNestedModelSerializer):
     role_choices = RolesSerializer(many=True)
     course_choices = CoursesSerializer(many=True)
 
-    def download_train_data(self, obj):
-        if obj.train_dataset_url:
-            file_path = default_storage.path(obj.train_dataset_url.name)
-            with zipfile.ZipFile(file_path, mode='r') as zip_file:
-                zip_buffer = zip_file.read()
-            zip_file.close()
-            response = HttpResponse(zip_buffer, content_type='application/zip')
-            response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_path)}"'
-            return response
-        else:
-            return None
+    # def download_train_data(self, obj):
+    #     if obj.train_dataset_url:
+    #         file_path = default_storage.path(obj.train_dataset_url.name)
+    #         with zipfile.ZipFile(file_path, mode='r') as zip_file:
+    #             zip_buffer = zip_file.read()
+    #         zip_file.close()
+    #         response = HttpResponse(zip_buffer, content_type='application/zip')
+    #         response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_path)}"'
+    #         return response
+    #     else:
+    #         return None
+    train_dataset_url = serializers.SerializerMethodField()
+
+    def get_train_dataset_url(self, obj):
+        if obj.train_dataset:
+            return obj.train_dataset.url
     class Meta:
         fields = (
             'id',

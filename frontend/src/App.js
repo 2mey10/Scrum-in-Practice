@@ -22,7 +22,7 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 
 function App() {
-  return (
+return (
     <div className="App">
         <Router>
             <AuthProvider>
@@ -42,7 +42,7 @@ function App() {
             </AuthProvider>
         </Router>
     </div>
-  );
+);
 }
 
 export default App;
