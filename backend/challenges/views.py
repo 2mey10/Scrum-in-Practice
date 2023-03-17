@@ -1,3 +1,4 @@
+import mimetypes
 
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
@@ -5,6 +6,9 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404
 import os
 from django.http import HttpResponse, HttpResponseNotFound
+from rest_framework.decorators import api_view
+from rest_framework.generics import RetrieveAPIView
+
 from .models import Challenge
 import os
 import zipfile
@@ -14,6 +18,7 @@ from rest_framework.response import Response
 from .serializers import QuestionSerializer
 from . import models
 from . import serializers
+from django.conf import settings
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
@@ -39,6 +44,20 @@ class MetricViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.MetricSerializer
 
 
+@api_view(['GET'])
+def getSingleChallenge(request, pk):
+    """
+    List all code snippets, or create a new snippet.
+    """
+
+    queryset = models.Challenge.objects.all()[pk-1]
+
+    print(queryset)
+
+    serializer_class = serializers.QuestionSerializer(queryset)
+
+    return Response(serializer_class.data)
+
 
 
 class DownloadTrainDataView(viewsets.ModelViewSet):
@@ -58,6 +77,23 @@ class DownloadTrainDataView(viewsets.ModelViewSet):
             return Challenge.objects.get(pk=pk)
         except Challenge.DoesNotExist:
             raise Http404
+
+def download_file(request):
+    # Define Django project base directory
+    # Define text file name
+    filename = '/testdata/test_set.zip'
+    # Define the full file path
+    filepath = str(settings.MEDIA_ROOT) + filename
+    # Open the file for reading content
+    path = open(filepath, 'r')
+    # Set the mime type
+    mime_type, _ = mimetypes.guess_type(filepath)
+    # Set the return value of the HttpResponse
+    response = HttpResponse(path, content_type=mime_type)
+    # Set the HTTP header for sending to browser
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    # Return the response value
+    return response
 
 
 
