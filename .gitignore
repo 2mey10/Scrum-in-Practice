@@ -131,3 +131,4 @@ backend/db.sqlite3
 
 # all in media
 backend/media/*
+/backend/media/
