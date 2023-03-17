@@ -10,53 +10,19 @@ import {Dialog, Grid, List, ListItem, ListItemText, TextField} from "@mui/materi
 import axios from "axios";
 import Ranking from "../Ranking";
 
-function DetailedChallenge() {
-    const { user, logoutUser } = useContext(AuthContext);
-    console.log(user)
 
+const baseURL = "http://127.0.0.1:8000/api/"
 
-    // fetch challenges data
-    const [challenges, setChallenges] = useState([]);
-    const [data, setData] = useState([]);
+function DetailedChallenge(props) {
 
-    useEffect(() => {
-        const getData = async () => {
-
-            try {
-                const response = await axios.get(
-                    baseURL + `challenge/`
-                );
-                console.log("fetched challenges data");
-                setChallenges(response.data);
-            } catch (err) {
-                console.log(err.message);
-                console.log("error in fetching challenges data")
-                setChallenges(null);
-            }
-        };
-        getData();
-        challenges.forEach((challenge)=>{
-            if (challenge.id === Number(challengeID)){
-                setData(challenge)
-            }
-        })
-    },[]);
-
-
-
-    const {challengeID} = useParams()
-    console.log("list of challenges")
-    console.log(challenges)
-
-
-
-    // styling
-    const textfieldLength = "400px";
+    let user = props.user
+    let data = props.data
+    let challengeID = props.challengeID
 
     // a local state to store the currently selected file.
     const [selectedFile, setSelectedFile] = React.useState(null);
-
-
+    console.log("props detailed",props)
+    console.log("detailed data",data)
 
     const renderButton = () => {
         return user?(
@@ -79,7 +45,6 @@ function DetailedChallenge() {
         )
     }
 
-    const baseURL = "http://127.0.0.1:8000/api/"
     const handleSubmit = async(event) => {
         event.preventDefault()
         let first_respone = {}
@@ -127,12 +92,13 @@ function DetailedChallenge() {
     const handleFileSelect = (event) => {
         setSelectedFile(event.target.files[0])
     }
-    console.log("dataaa")
-    console.log(data)
+
     const metrics=['Accuracy','Recall','Precision','F1']
 
+    // styling
+    const textfieldLength = "400px";
     return (
-        <div>
+        <div key={props.challengeID}>
             <Typography variant={"h1"} justifyContent="center" display="flex">
                 {data.description_text}
             </Typography>
@@ -205,14 +171,64 @@ function DetailedChallenge() {
 function ChallengePage() {
     const { user, logoutUser } = useContext(AuthContext);
     console.log(user)
+    // fetch challenges data
+    const [challenges, setChallenges] = useState([]);
+    const [data, setData] = useState([]);
+
+    const {challengeID} = useParams()
+    useEffect(() => {
+        const getData = async () => {
+
+            try {
+                const response = await axios.get(
+                    baseURL + `challenge/`
+                );
+                console.log("fetched challenges data",response.data);
+                setChallenges(response.data);
+                console.log("setting fetched challenges",challenges)
+            } catch (err) {
+                console.log(err.message);
+                console.log("error in fetching challenges data")
+                setChallenges(null);
+            }
+        };
+        getData();
+    },[]);
+
+
+    console.log("list of challenges")
+    console.log(challenges)
+
+    console.log("dataaa")
+    console.log(data)
+    console.log(challenges)
+    useEffect(()=>{
+        const getChallenge = () => {
+            console.log("selecting challenge...")
+            let selectChallenge = challenges.filter(function(el){
+                return el.id===Number(challengeID)
+            })
+            console.log("selectchallenge:",selectChallenge)
+            setData(selectChallenge)
+        }
+        getChallenge();
+    },challenges)
+    // let selectChallenge = challenges.filter(function(el){
+    //     return el.id===Number(challengeID)
+    // })
+    // setData(selectChallenge)
+    console.log("selected Challenge",data)
 
     return (
         <div>
-
            <Typography variant="h1">
                challenge page
            </Typography>
-            <DetailedChallenge/>
+            <DetailedChallenge
+            user = {user}
+            data = {data}
+            challengeID = {challengeID}
+            />
 
         </div>
     );
