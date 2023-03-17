@@ -106,7 +106,7 @@ function DetailedChallenge(props) {
         const blob = response.blob;
         console.log("blob",blob)
     }
-
+    let challengeDownloadIndex = Number(challengeID) - 1
 
     return (
         <div key={props.challengeID}>
@@ -125,7 +125,7 @@ function DetailedChallenge(props) {
                                     Datasets
                                 </Typography>
                                 <Button  variant="outlined" color="primary" sx={{marginTop:"40px"}}
-                                         target="_blank" href={baseURL + `download/`+ challengeID-1}>
+                                         target="_blank" href={baseURL + `download/`+ challengeDownloadIndex}>
                                     Download training set
                                 </Button>
                         </Grid>
