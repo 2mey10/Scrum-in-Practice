@@ -94,11 +94,11 @@ function DetailedChallenge() {
     // styling
     const textfieldLength = "400px";
 
-    const metrics = [];
-    props.data.metric_choices.forEach((metric)=>{
-        metrics.push(metric.metric_name)
-    })
-    props.data = data;
+    // const metrics = [];
+    // data.metric_choices.map((metric)=>{
+    //     metrics.push(metric.metric_name)
+    // })
+    //props.data = data;
 
     // a local state to store the currently selected file.
     const [selectedFile, setSelectedFile] = React.useState(null);
@@ -175,11 +175,6 @@ function DetailedChallenge() {
 
     return (
         <div>
-            <div>
-                {challenges.map((ch)=>{
-                    console.log("xd")
-                })}
-            </div>
             <Typography variant={"h1"} justifyContent="center" display="flex">
                 {data.description_text}
             </Typography>
@@ -221,10 +216,10 @@ function DetailedChallenge() {
                                 Metrics
                             </Typography>
                             <List sx={{display:"flex"}}>
-                                {metrics.map((metric)=>(
+                                {challenges.map((challenge)=>(
                                     <ListItem sx={{margin:"3px"}}>
                                         <ListItemText
-                                            primary={metric}
+                                            primary={challenge.metrics}
                                             secondary={"Metric description"}
                                         />
                                     </ListItem>
