@@ -190,7 +190,7 @@ const CreateChallenge = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h6">
-                            Testing Set
+                            Training Set
                         </Typography>
                         <form style={{paddingTop:"70px"}}>
                             <input type="file" onChange={handleFileSelectTrain}/>
@@ -330,20 +330,20 @@ const CreateChallenge = () => {
                             }
                         </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <input
-                            accept="image/*"
-                            type="file"
-                            style={{ display: 'none' }}
-                            id="cover-image"
-                            onChange={(e) => setCoverImage(e.target.files[0])}
-                        />
-                        <label htmlFor="cover-image">
-                            <Button variant="contained" color="primary" component="span">
-                                Upload Cover Image
-                            </Button>
-                        </label>
-                    </Grid>
+                    {/*<Grid item xs={12}>*/}
+                    {/*    <input*/}
+                    {/*        accept="image/*"*/}
+                    {/*        type="file"*/}
+                    {/*        style={{ display: 'none' }}*/}
+                    {/*        id="cover-image"*/}
+                    {/*        onChange={(e) => setCoverImage(e.target.files[0])}*/}
+                    {/*    />*/}
+                    {/*    <label htmlFor="cover-image">*/}
+                    {/*        <Button variant="contained" color="primary" component="span">*/}
+                    {/*            Upload Cover Image*/}
+                    {/*        </Button>*/}
+                    {/*    </label>*/}
+                    {/*</Grid>*/}
                     <Grid item xs={12}>
                         <Button type="submit" variant="contained" color="primary">
                             Create Challenge

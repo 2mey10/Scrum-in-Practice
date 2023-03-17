@@ -125,7 +125,7 @@ function DetailedChallenge(props) {
                                     Datasets
                                 </Typography>
                                 <Button  variant="outlined" color="primary" sx={{marginTop:"40px"}}
-                                         target="_blank" href={baseURL + `download/`+ challengeID}>
+                                         target="_blank" href={baseURL + `download/`+ challengeID-1}>
                                     Download training set
                                 </Button>
                         </Grid>
