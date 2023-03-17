@@ -17,15 +17,15 @@ Entwicklung einer Webanwendung mit React.js und Django Restframework. Das Fronte
 
 - View Challenges  
 
-- View Ranking
-
-- Submit model 
-
 - Data Set Upload 
 
 - Data Set Download 
 
-- Tutor Rechte
+- Submit Model 
+
+- View Ranking
+
+- Tutor-Rechte
  
 
 
@@ -75,8 +75,8 @@ Browser öffnen und localhost:3000 eingeben
 
 
 ## nötiges Format für durch Tutoren hochgeladene Datensätze:
-Trainings- und Testdaten sollten separat hochgeladen werden.
-Jeder dieser beiden Datensätze sollte das durch die Klasse torchvision.datasets.ImageFolder vorgegebene Format haben (siehe https://pytorch.org/vision/stable/generated/torchvision.datasets.ImageFolder.html#torchvision.datasets.ImageFolder)
+Trainings- und Testdaten müssen separat hochgeladen werden. Die Nicht-Tutoren können nur den Trainingsdatensatz sehen und herunterladen.
+Jeder dieser beiden Datensätze sollte das durch die Klasse torchvision.datasets.ImageFolder vorgegebene Format haben (siehe https://pytorch.org/vision/stable/generated/torchvision.datasets.ImageFolder.html#torchvision.datasets.ImageFolder und required_data_set_structure.txt)
 d.h. ein Ordner für Trainings- und ein Ordner für Testdaten, in jedem dieser Ordner n Unterordner mit Bildern für die n Klassen (die Unterordner sollten nachvollziehbare Klassennamen haben). Daraus müssen 2 .zip-Dateien erstellt werden.
 
 Beispiele für Datensätze mit passendem Format:
@@ -85,7 +85,8 @@ https://www.kaggle.com/datasets/puneet6060/intel-image-classification
 
 
 ## Hinweise für das Training:
-Beim Training muss das Modell mit denselben Transforms geladen werden wie im Auswertungsskript, damit die Auswertung funktioniert, d.h. transforms.Compose([ transforms.ToTensor(), transforms.Grayscale(1), transforms.Resize((28,28)) ])
+Beim Training muss das Modell mit denselben Transforms geladen werden wie im Auswertungsskript, damit die Auswertung funktioniert, d.h. 
+> transforms.Compose([ transforms.ToTensor(), transforms.Grayscale(1), transforms.Resize((28,28)) ])
 Vor dem Speichern als ONNX-Modell muss der Student für sein Modell .eval() aufrufen.
 
 
