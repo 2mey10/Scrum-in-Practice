@@ -71,18 +71,6 @@ Trainings- und Testdaten sollten separat hochgeladen werden.
 Jeder dieser beiden Datensätze sollte das durch die Klasse torchvision.datasets.ImageFolder vorgegebene Format haben (siehe https://pytorch.org/vision/stable/generated/torchvision.datasets.ImageFolder.html#torchvision.datasets.ImageFolder)
 d.h. ein Ordner für Trainings- und ein Ordner für Testdaten, in jedem dieser Ordner n Unterordner mit Bildern für die n Klassen (die Unterordner sollten nachvollziehbare Klassennamen haben). Daraus müssen 2 .zip-Dateien erstellt werden.
 
-directory/
-├── class_x
-│   ├── xxx.ext
-│   ├── xxy.ext
-│   └── ...
-│   └── xxz.ext
-└── class_y
-    ├── 123.ext
-    ├── nsdf3.ext
-    └── ...
-    └── asd932_.ext
-
 Beispiele für Datensätze mit passendem Format:
 https://www.kaggle.com/datasets/tongpython/cat-and-dog
 https://www.kaggle.com/datasets/puneet6060/intel-image-classification 
