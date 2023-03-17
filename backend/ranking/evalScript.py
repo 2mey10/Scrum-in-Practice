@@ -113,14 +113,14 @@ def evaluate_model(model_path, test_data_loader, task):
         # performance_scores["F1"] = f1_score
 
         precision_score_value = precision_score(y_true=target.detach().numpy(), y_pred=preds.detach().numpy(),
-                                                average='weighted')
+                                                average='micro', zero_division=True)
         performance_scores["precision"] = round(precision_score_value, 4)
         # precision_metric = Precision(task="multiclass", average='macro', num_classes=n_classes)
         # precision_score = round(precision_metric(preds, target).item(), 4)
         # performance_scores["precision"] = precision_score
 
         recall_score_value = recall_score(y_true=target.detach().numpy(), y_pred=preds.detach().numpy(),
-                                          average='weighted')
+                                          average='micro')
         performance_scores["recall"] = round(recall_score_value, 4)
         # recall_metric = Recall(task="multiclass", average='macro', num_classes=n_classes)
         # recall_score = round(recall_metric(preds, target).item(), 4)
