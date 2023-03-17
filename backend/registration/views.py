@@ -10,7 +10,10 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Usermodel
 from .serializers import MyTokenObtainPairSerializer, RegisterSerializer
 
+import os
 
+# macOS fix :)
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 # Create your views here.
 
 

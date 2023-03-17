@@ -17,6 +17,7 @@ function DetailedChallenge() {
 
     // fetch challenges data
     const [challenges, setChallenges] = useState([]);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
@@ -34,74 +35,28 @@ function DetailedChallenge() {
             }
         };
         getData();
-    }, []);
+        challenges.forEach((challenge)=>{
+            if (challenge.id === Number(challengeID)){
+                setData(challenge)
+            }
+        })
+    },[]);
 
 
 
     const {challengeID} = useParams()
-    let data = {}
     console.log("list of challenges")
     console.log(challenges)
-    challenges.forEach((challenge)=>{
-        if (challenge.id === Number(challengeID)){
-            data = challenge
-        }
-        })
 
-    console.log("DATAAAAA")
-    console.log(data)
 
-    let props = {
-        title:"titlE",
-        description:"desdasdas",
-        data:{
-            "id": 1,
-            "description_text": "testasdasdas",
-            "title_text": "test",
-            "train_dataset_url": "http://127.0.0.1:8000/media/traindata/test_56XfYMh.zip",
-            "test_dataset_url": "http://127.0.0.1:8000/media/testdata/test_o7dHhO6.zip",
-            "metric_choices": [
-                {
-                    "id": 1,
-                    "metric_name": "Accuracy",
-                    "metric_formular": "acc"
-                }
-            ],
-            "role_choices": [
-                {
-                    "id": 1,
-                    "role_name": "Classification"
-                }
-            ],
-            "course_choices": [
-                {
-                    "id": 1,
-                    "course_name": "Informatik",
-                    "course_description": ":)"
-                }
-            ],
-            "starting_time": "2023-03-06T18:23:00Z",
-            "end_time": "2023-03-16T18:23:00Z",
-            "cover_image": null,
-            "is_human": false,
-            "min_classification": 10,
-            "max_classification": 100
-        }
-    }
 
-    console.log("props challenge element")
-    console.log(props)
     // styling
     const textfieldLength = "400px";
 
-    // const metrics = [];
-    // data.metric_choices.map((metric)=>{
-    //     metrics.push(metric.metric_name)
-    // })
-    //props.data = data;
-
     // a local state to store the currently selected file.
     const [selectedFile, setSelectedFile] = React.useState(null);
+
+
 
     const renderButton = () => {
         return user?(
@@ -173,6 +128,8 @@ function DetailedChallenge() {
         setSelectedFile(event.target.files[0])
     }
 
+    const metrics=['Accuracy','Recall','Precision','F1']
+
     return (
         <div>
             <Typography variant={"h1"} justifyContent="center" display="flex">
@@ -216,10 +173,10 @@ function DetailedChallenge() {
                                 Metrics
                             </Typography>
                             <List sx={{display:"flex"}}>
-                                {challenges.map((challenge)=>(
+                                {metrics.map((metric)=>(
                                     <ListItem sx={{margin:"3px"}}>
                                         <ListItemText
-                                            primary={challenge.metrics}
+                                            primary={metric}
                                             secondary={"Metric description"}
                                         />
                                     </ListItem>
