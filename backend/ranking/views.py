@@ -48,7 +48,7 @@ def makeEntry(request):
     queryset = models.MlModel.objects.values_list('ml_model')
 
     queryset_ch = models.Challenge.objects.values_list("test_dataset_url")
-    data_id = queryset_ch[ch_id][0]
+    data_id = int(queryset_ch[ch_id][0]) - 1
 
     queryset_data = challenges.models.TrainData.objects.values_list("test_dataset_url")
 
@@ -56,7 +56,6 @@ def makeEntry(request):
     path_mod = str(settings.MEDIA_ROOT) +  "/" +  queryset[model_id][0]
     path_zip = str(settings.MEDIA_ROOT) +  "/" +  queryset_data[data_id][0]
     score = start_evaluation(path_mod, "Klassifizierung", path_zip)
-    print(path_mod, path_zip)
 
     rank_query = models.RankingEntry(model_ref = models.MlModel.objects.all()[model_id],
     username = request.data.get("username"),
