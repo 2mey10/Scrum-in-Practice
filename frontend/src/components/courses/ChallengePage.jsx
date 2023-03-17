@@ -127,7 +127,8 @@ function DetailedChallenge() {
     const handleFileSelect = (event) => {
         setSelectedFile(event.target.files[0])
     }
-
+    console.log("dataaa")
+    console.log(data)
     const metrics=['Accuracy','Recall','Precision','F1']
 
     return (
@@ -194,7 +195,7 @@ function DetailedChallenge() {
                 </div>
             </div>
             <div>
-                <Ranking/>
+                <Ranking challengeID={challengeID}/>
             </div>
         </div>
     );
@@ -211,7 +212,6 @@ function ChallengePage() {
            <Typography variant="h1">
                challenge page
            </Typography>
-
             <DetailedChallenge/>
 
         </div>
