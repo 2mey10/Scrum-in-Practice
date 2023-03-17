@@ -83,6 +83,7 @@ function DetailedChallenge(props) {
             });
             console.log("pinged second endpoint and started evaluation!")
             console.log(response)
+            window.location.reload();
         } catch(error) {
             console.log("second endpoint was not reached")
             console.log(error)
@@ -102,7 +103,7 @@ function DetailedChallenge(props) {
             <Typography variant={"h1"} justifyContent="center" display="flex">
                 {data.title_text}
             </Typography>
-            <Typography variant={"h4"} color="#808080" justifyContent="center" display="flex">
+            <Typography variant={"h6"} color="#808080" justifyContent="center" display="flex">
                 {data.description_text}
             </Typography>
             <div className="outer-container">
